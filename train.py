@@ -8,7 +8,8 @@ from io import BytesIO
 class WorkoutGuide:
     def __init__(self, is_gym):
         self.is_gym = is_gym
-        self.sound = st.empty()
+        self.sound_counter = 0
+        
 
         self.home_workout_schedule = {
             'Monday': [[('俄罗斯转体', 30), ('深蹲', 40)], 
@@ -35,8 +36,8 @@ class WorkoutGuide:
                         [('Plank', 20), ('Side Plank', 20)]],
             'Saturday': [[('Rest', 1)]],
             'Sunday':  [[('俄罗斯转体', 5), ('深蹲', 5)], 
-                       [('平躺交叉脚', 30), ('宽臂俯卧撑', 30)], 
-                       [('单脚站立右', 30), ('单脚站立左', 20)], 
+                       [('平躺交叉脚', 3), ('宽臂俯卧撑', 4)], 
+                       [('单脚站立右', 2), ('单脚站立左', 4)], 
                        [('宽臂俯卧撑', 30), ('up dog down dog 拉伸', 30)], 
                        [('侧身平板支撑左', 30), ('侧身平板支撑右', 30)], 
                        [('宽臂俯卧撑', 30), ('俄罗斯转体', 30)]]
@@ -152,8 +153,11 @@ class WorkoutGuide:
             </audio>
             """.format(url)
 
-        
-        self.sound.markdown(html_string, unsafe_allow_html=True)
+        attr_name = "sound_{}".format(self.sound_counter)
+        setattr(self, attr_name, st.empty())
+        getattr(self, attr_name).markdown(html_string, unsafe_allow_html=True)
+
+        self.sound_counter += 1
 
     
 def main():
