@@ -8,6 +8,7 @@ from io import BytesIO
 class WorkoutGuide:
     def __init__(self, is_gym):
         self.is_gym = is_gym
+        self.sound = st.empty()
 
         self.home_workout_schedule = {
             'Monday': [[('俄罗斯转体', 30), ('深蹲', 40)], 
@@ -125,6 +126,7 @@ class WorkoutGuide:
                 pass
             time.sleep(1)
         self.speak("Time's up! Next one.")
+        self.play_sound()
 
     def rest_timer(self, duration, placeholder, extra_text = None):
         self.speak(f"Rest for {duration} seconds")
@@ -143,7 +145,17 @@ class WorkoutGuide:
             #     pass
         self.speak("Rest time's over! Get ready.")
 
+    def play_sound(self, url = "https://www.orangefreesounds.com/wp-content/uploads/2022/04/Small-bell-ringing-short-sound-effect.mp3"):
+        html_string = """
+            <audio controls autoplay>
+                <source src={} type="audio/mp3">
+            </audio>
+            """.format(url)
 
+        
+        self.sound.markdown(html_string, unsafe_allow_html=True)
+
+    
 def main():
     st.title('Workout Guide')
     if st.button('Start Gym Workout'):
@@ -180,12 +192,5 @@ if __name__ == "__main__":
     # st.write("# Auto-playing Audio!")
 
     # autoplay_audio("local_audio.mp3")
-    html_string = """
-            <audio controls autoplay>
-              <source src="https://www.orangefreesounds.com/wp-content/uploads/2022/04/Small-bell-ringing-short-sound-effect.mp3" type="audio/mp3">
-            </audio>
-            """
 
-    sound = st.empty()
-    sound.markdown(html_string, unsafe_allow_html=True)
     main()
