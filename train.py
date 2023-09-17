@@ -28,6 +28,7 @@ class WorkoutGuide:
 
 
     def execute_workout(self):
+        st.markdown("<style>h1 { text-align: center; }</style>", unsafe_allow_html=True)
         current_day = time.strftime("%A")
         st.write(f"Today is {current_day}, let's get started!")
         
@@ -52,7 +53,8 @@ class WorkoutGuide:
         self.speak(f"Start {exercise}")
         max = duration
         for sec in range(duration, 0, -1):
-            placeholder.markdown(f"<h1 style='font-size:48px;'>{exercise}\n{sec}/{max} seconds.</h1>", unsafe_allow_html=True)
+            placeholder.markdown(f"<h1>{exercise}\n{sec}/{max} seconds.</h1>", unsafe_allow_html=True)
+            st.image(f"gifs/{exercise}.gif", width=400, caption=f"{exercise} in action")
             time.sleep(1)
         self.speak("Time's up! Next one.")
 
