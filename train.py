@@ -1,5 +1,5 @@
+import streamlit as st
 import time
-import pyttsx3
 
 class WorkoutGuide:
     def __init__(self):
@@ -14,27 +14,46 @@ class WorkoutGuide:
         }
 
     def speak(self, text):
-        engine = pyttsx3.init()
-        engine.say(text)
-        engine.runAndWait()
+        st.write(f"""
+        <audio id='speech'></audio> 
+        <script>
+            function setVoiceAndSpeak(text) {
+                var synth = window.speechSynthesis;
+                var voices = synth.getVoices();
+                var msg = new SpeechSynthesisUtterance(text);
+                
+                for (var i = 0; i < voices.length; i++) {
+                    if (voices[i].name === 'Google US English') {
+                        msg.voice = voices[i];
+                        break;
+                    }
+                }
+                synth.speak(msg);
+            }
+            
+            window.speechSynthesis.onvoiceschanged = function() {
+                setVoiceAndSpeak('{text}');
+            };
+        </script>
+        """, unsafe_allow_html=True)
 
     def workout_timer(self, duration, exercise):
         self.speak(f"Start {exercise}")
         for sec in range(duration, 0, -1):
-            print(f"{sec} seconds remaining.")
+            st.write(f"{sec} seconds remaining.")
             time.sleep(1)
         self.speak("Time's up! Next one.")
 
     def rest_timer(self, duration):
         self.speak(f"Rest for {duration} seconds")
         for sec in range(duration, 0, -1):
-            print(f"{sec} seconds remaining.")
+            st.write(f"{sec} seconds remaining.")
             time.sleep(1)
         self.speak("Rest time's over! Get ready.")
 
     def execute_workout(self):
         current_day = time.strftime("%A")
-        print(f"Today is {current_day}, let's get started!")
+        st.write(f"Today is {current_day}, let's get started!")
         today_workout = self.workout_schedule.get(current_day, [[('Rest', 1)]])
 
         for group in today_workout:
@@ -42,9 +61,14 @@ class WorkoutGuide:
                 self.workout_timer(duration, exercise)
             self.rest_timer(40)
 
-        print("Well done, you've crushed it today!")
+        st.write("Well done, you've crushed it today!")
         self.speak("Well done, you've crushed it today!")
 
+def main():
+    st.title('Workout Guide')
+    if st.button('Start Workout'):
+        guide = WorkoutGuide()
+        guide.execute_workout()
+
 if __name__ == "__main__":
-    guide = WorkoutGuide()
-    guide.execute_workout()
+    main()
