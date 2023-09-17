@@ -1,6 +1,6 @@
 import streamlit as st
 import time
-from gtts import gTTS
+# from gtts import gTTS
 from io import BytesIO
 
 
@@ -16,10 +16,10 @@ class WorkoutGuide:
             'Saturday': [[('Rest', 1)]],
             'Sunday':  [[('Jumping Jacks', 3), ('Mountain Climbers', 5)]]
         }
-        self.sound_file = BytesIO()
-        tts = gTTS('Add text-to-speech to your app', lang='en')
-        tts.write_to_fp(self.sound_file)
-        st.audio(self.sound_file)
+        # self.sound_file = BytesIO()
+        # tts = gTTS('Add text-to-speech to your app', lang='en')
+        # tts.write_to_fp(self.sound_file)
+        # st.audio(self.sound_file)
 
 
       
