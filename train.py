@@ -118,7 +118,7 @@ class WorkoutGuide:
         self.speak(f"Start {exercise}")
         max = duration
         for sec in range(duration, 0, -1):
-            placeholder.markdown(f"<h1  style='font-size:75px;'>{exercise}<br>{sec}/{max}秒.</h1>", unsafe_allow_html=True)
+            placeholder.markdown(f"<h1  style='font-size:70px;'>{exercise}<br>{sec}/{max}秒.</h1>", unsafe_allow_html=True)
             try:
                 st.image(f"gifs/{exercise}.gif", width=400, caption=f"{exercise} in action")
             except:
@@ -154,4 +154,38 @@ def main():
         guide.execute_workout()
 
 if __name__ == "__main__":
+    
+
+
+    import base64
+
+    # import streamlit as st
+
+
+    def autoplay_audio(file_path: str):
+        with open(file_path, "rb") as f:
+            data = f.read()
+            b64 = base64.b64encode(data).decode()
+            md = f"""
+                <audio controls autoplay="true">
+                <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
+                </audio>
+                """
+            st.markdown(
+                md,
+                unsafe_allow_html=True,
+            )
+
+
+    # st.write("# Auto-playing Audio!")
+
+    # autoplay_audio("local_audio.mp3")
+    html_string = """
+            <audio controls autoplay>
+              <source src="https://www.orangefreesounds.com/wp-content/uploads/2022/04/Small-bell-ringing-short-sound-effect.mp3" type="audio/mp3">
+            </audio>
+            """
+
+    sound = st.empty()
+    sound.markdown(html_string, unsafe_allow_html=True)
     main()
