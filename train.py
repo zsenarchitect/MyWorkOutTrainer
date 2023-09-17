@@ -106,6 +106,7 @@ class WorkoutGuide:
         placeholder = st.empty()
         for group in today_workout:
             for exercise, duration in group:
+                self.rest_timer(8, placeholder, extra_text = f"下一个动作:<br>{exercise}")
                 self.workout_timer(duration, exercise, placeholder)
             self.rest_timer(40, placeholder)
 
@@ -125,17 +126,21 @@ class WorkoutGuide:
             time.sleep(1)
         self.speak("Time's up! Next one.")
 
-    def rest_timer(self, duration, placeholder):
+    def rest_timer(self, duration, placeholder, extra_text = None):
         self.speak(f"Rest for {duration} seconds")
         max = duration
+        if not extra_text:
+            note = "休息一下!"
+        else:
+            note = extra_text
         for sec in range(duration, 0, -1):
-            placeholder.markdown(f"<h1 style='font-size:75px;'>休息一下!<br>{sec}/{max}秒.</h1>", unsafe_allow_html=True)
+            placeholder.markdown(f"<h1 style='font-size:75px;'>{note}<br>{sec}/{max}秒.</h1>", unsafe_allow_html=True)
             time.sleep(1)
-            try:
-                if st.button("跳过这个休息"):
-                    break
-            except:
-                pass
+            # try:
+            #     if st.button("跳过这个休息"):
+            #         break
+            # except:
+            #     pass
         self.speak("Rest time's over! Get ready.")
 
 
