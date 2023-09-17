@@ -14,7 +14,7 @@ class WorkoutGuide:
         }
 
     def speak(self, text):
-        st.write(f"""
+        st.write("""
         <audio id='speech'></audio> 
         <script>
             function setVoiceAndSpeak(text) {
@@ -32,7 +32,7 @@ class WorkoutGuide:
             }
             
             window.speechSynthesis.onvoiceschanged = function() {
-                setVoiceAndSpeak('{text}');
+                setVoiceAndSpeak('""" + text + """');
             };
         </script>
         """, unsafe_allow_html=True)
