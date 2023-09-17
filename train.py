@@ -7,12 +7,56 @@ from io import BytesIO
 
 class WorkoutGuide:
     def __init__(self):
-        self.workout_schedule = {
-            'Monday': [[('Push-up宽鼻', 30), ('Sit-up', 40)], [('Squats', 30), ('Lunges', 40)], [('Plank', 20), ('Side Plank', 20)], [('Bicycle Crunches', 30), ('Leg Raise', 40)]],
-            'Tuesday': [[('Squats', 30), ('Lunges', 40)], [('Push-up', 30), ('Sit-up', 40)], [('Bicycle Crunches', 30), ('Leg Raise', 40)], [('Plank', 20), ('Side Plank', 20)]],
-            'Wednesday': [[('Plank', 20), ('Side Plank', 20)], [('Push-up', 30), ('Sit-up', 40)], [('Squats', 30), ('Lunges', 40)], [('Bicycle Crunches', 30), ('Leg Raise', 40)]],
-            'Thursday': [[('Bicycle Crunches', 30), ('Leg Raise', 40)], [('Squats', 30), ('Lunges', 40)], [('Plank', 20), ('Side Plank', 20)], [('Push-up', 30), ('Sit-up', 40)]],
-            'Friday': [[('Jumping Jacks', 30), ('Mountain Climbers', 30)], [('Push-up', 30), ('Sit-up', 40)], [('Squats', 30), ('Lunges', 40)], [('Plank', 20), ('Side Plank', 20)]],
+
+        self.home_workout_schedule = {
+            'Monday': [[('俄罗斯转体', 30), ('深蹲', 40)], 
+                       [('平躺交叉脚', 30), ('宽臂俯卧撑', 30)], 
+                       [('单脚站立右', 30), ('单脚站立左', 20)], 
+                       [('宽臂俯卧撑', 30), ('up dog down dog 拉伸', 30)], 
+                       [('侧身平板支撑左', 30), ('侧身平板支撑右', 30)], 
+                       [('宽臂俯卧撑', 30), ('俄罗斯转体', 30)]],
+            'Tuesday': [[('膝盖平板支撑', 30), ('Lunges', 40)], 
+                        [('Push-up', 30), ('Sit-up', 40)], 
+                        [('Bicycle Crunches', 30), ('Leg Raise', 40)], 
+                        [('Plank', 20), ('Side Plank', 20)]],
+            'Wednesday':[[('Plank', 20), ('Side Plank', 20)], 
+                        [('Push-up', 30), ('Sit-up', 40)], 
+                        [('Squats', 30), ('Lunges', 40)], 
+                        [('Bicycle Crunches', 30), ('Leg Raise', 40)]],
+            'Thursday': [[('Bicycle Crunches', 30), ('Leg Raise', 40)],
+                        [('Squats', 30), ('Lunges', 40)], 
+                        [('Plank', 20), ('Side Plank', 20)], 
+                        [('Push-up', 30), ('Sit-up', 40)]],
+            'Friday': [[('Jumping Jacks', 30), ('Mountain Climbers', 30)],
+                        [('Push-up', 30), ('Sit-up', 40)], 
+                        [('Squats', 30), ('Lunges', 40)], 
+                        [('Plank', 20), ('Side Plank', 20)]],
+            'Saturday': [[('Rest', 1)]],
+            'Sunday':  [[('吃饭Jumping Jacks', 3), ('Mountain Climbers', 5)]]
+        }      
+        self.gym_workout_schedule = {
+            'Monday': [[('坐举哑铃上举', 30), ('深蹲', 40)], 
+                       [('两臂平举', 30), ('半仰哑铃上举', 30)], 
+                       [('单脚站立右', 30), ('单脚站立左', 20)], 
+                       [('宽臂俯卧撑', 30), ('小臂正手腕部', 30)], 
+                       [('窄臂俯卧撑', 30), ('小臂反手腕部', 30)], 
+                       [('俯身拉举左', 30), ('俯身拉举右', 30)]],
+            'Tuesday': [[('Squats', 30), ('Lunges', 40)], 
+                        [('Push-up', 30), ('Sit-up', 40)], 
+                        [('Bicycle Crunches', 30), ('Leg Raise', 40)], 
+                        [('Plank', 20), ('Side Plank', 20)]],
+            'Wednesday':[[('Plank', 20), ('Side Plank', 20)], 
+                        [('Push-up', 30), ('Sit-up', 40)], 
+                        [('Squats', 30), ('Lunges', 40)], 
+                        [('Bicycle Crunches', 30), ('Leg Raise', 40)]],
+            'Thursday': [[('Bicycle Crunches', 30), ('Leg Raise', 40)],
+                        [('Squats', 30), ('Lunges', 40)], 
+                        [('Plank', 20), ('Side Plank', 20)], 
+                        [('Push-up', 30), ('Sit-up', 40)]],
+            'Friday': [[('Jumping Jacks', 30), ('Mountain Climbers', 30)],
+                        [('Push-up', 30), ('Sit-up', 40)], 
+                        [('Squats', 30), ('Lunges', 40)], 
+                        [('Plank', 20), ('Side Plank', 20)]],
             'Saturday': [[('Rest', 1)]],
             'Sunday':  [[('吃饭Jumping Jacks', 3), ('Mountain Climbers', 5)]]
         }
@@ -43,7 +87,7 @@ class WorkoutGuide:
         st.write(f"Today is {current_day}, let's get started!")
         
         # Display the full list of exercises for today
-        today_workout = self.workout_schedule.get(current_day, [[('Rest', 1)]])
+        today_workout = self.gym_workout_schedule.get(current_day, [[('Rest', 1)]])
         st.write("Today's Exercises:")
         for group in today_workout:
             st.write(", ".join([exercise for exercise, _ in group]))
@@ -75,7 +119,7 @@ class WorkoutGuide:
         self.speak(f"Rest for {duration} seconds")
         max = duration
         for sec in range(duration, 0, -1):
-            placeholder.markdown(f"<h1 style='font-size:90px;'>Take a rest!<br>{sec}/{max} seconds.</h1>", unsafe_allow_html=True)
+            placeholder.markdown(f"<h1 style='font-size:75px;'>Take a rest!<br>{sec}/{max} seconds.</h1>", unsafe_allow_html=True)
             time.sleep(1)
         self.speak("Rest time's over! Get ready.")
 
