@@ -41,7 +41,7 @@ class WorkoutGuide:
                        [('宽臂俯卧撑', 30), ('俄罗斯转体', 30)]]
         }      
 
-        
+
         self.gym_workout_schedule = {
             'Monday': [[('坐举哑铃上举', 30), ('深蹲', 40)], 
                        [('两臂平举', 30), ('半仰哑铃上举', 30)], 
@@ -106,7 +106,7 @@ class WorkoutGuide:
         for group in today_workout:
             for exercise, duration in group:
                 self.workout_timer(duration, exercise, placeholder)
-                self.rest_timer(40, placeholder)
+            self.rest_timer(40, placeholder)
 
         st.write("Well done, you've crushed it today!")
         self.speak("Well done, you've crushed it today!")
@@ -116,7 +116,7 @@ class WorkoutGuide:
         self.speak(f"Start {exercise}")
         max = duration
         for sec in range(duration, 0, -1):
-            placeholder.markdown(f"<h1>{exercise}<br>{sec}/{max} seconds.</h1>", unsafe_allow_html=True)
+            placeholder.markdown(f"<h1  style='font-size:75px;'>{exercise}<br>{sec}/{max} seconds.</h1>", unsafe_allow_html=True)
             try:
                 st.image(f"gifs/{exercise}.gif", width=400, caption=f"{exercise} in action")
             except:
@@ -130,6 +130,8 @@ class WorkoutGuide:
         for sec in range(duration, 0, -1):
             placeholder.markdown(f"<h1 style='font-size:75px;'>Take a rest!<br>{sec}/{max} seconds.</h1>", unsafe_allow_html=True)
             time.sleep(1)
+            if st.button("Skip"):
+                break
         self.speak("Rest time's over! Get ready.")
 
 
