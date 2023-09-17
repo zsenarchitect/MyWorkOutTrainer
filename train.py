@@ -103,6 +103,7 @@ class WorkoutGuide:
         
         # Workout loop
         placeholder = st.empty()
+        self.bt_skip = st.button("Skip")
         for group in today_workout:
             for exercise, duration in group:
                 self.workout_timer(duration, exercise, placeholder)
@@ -116,7 +117,7 @@ class WorkoutGuide:
         self.speak(f"Start {exercise}")
         max = duration
         for sec in range(duration, 0, -1):
-            placeholder.markdown(f"<h1  style='font-size:75px;'>{exercise}<br>{sec}/{max} seconds.</h1>", unsafe_allow_html=True)
+            placeholder.markdown(f"<h1  style='font-size:75px;'>{exercise}<br>{sec}/{max}秒.</h1>", unsafe_allow_html=True)
             try:
                 st.image(f"gifs/{exercise}.gif", width=400, caption=f"{exercise} in action")
             except:
@@ -128,9 +129,9 @@ class WorkoutGuide:
         self.speak(f"Rest for {duration} seconds")
         max = duration
         for sec in range(duration, 0, -1):
-            placeholder.markdown(f"<h1 style='font-size:75px;'>Take a rest!<br>{sec}/{max} seconds.</h1>", unsafe_allow_html=True)
+            placeholder.markdown(f"<h1 style='font-size:75px;'>休息一下!<br>{sec}/{max}秒.</h1>", unsafe_allow_html=True)
             time.sleep(1)
-            if st.button("Skip"):
+            if self.bt_skip:
                 break
         self.speak("Rest time's over! Get ready.")
 
