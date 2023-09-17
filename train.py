@@ -33,7 +33,7 @@ class WorkoutGuide:
                         [('Squats', 30), ('Lunges', 40)], 
                         [('Plank', 20), ('Side Plank', 20)]],
             'Saturday': [[('Rest', 1)]],
-            'Sunday':  [[('俄罗斯转体', 30), ('深蹲', 40)], 
+            'Sunday':  [[('俄罗斯转体', 5), ('深蹲', 5)], 
                        [('平躺交叉脚', 30), ('宽臂俯卧撑', 30)], 
                        [('单脚站立右', 30), ('单脚站立左', 20)], 
                        [('宽臂俯卧撑', 30), ('up dog down dog 拉伸', 30)], 
@@ -102,8 +102,8 @@ class WorkoutGuide:
             st.write(", ".join([exercise for exercise, _ in group]))
         
         # Workout loop
+        self.bt_skip = st.empty()
         placeholder = st.empty()
-        self.bt_skip = st.button("Skip")
         for group in today_workout:
             for exercise, duration in group:
                 self.workout_timer(duration, exercise, placeholder)
@@ -131,7 +131,7 @@ class WorkoutGuide:
         for sec in range(duration, 0, -1):
             placeholder.markdown(f"<h1 style='font-size:75px;'>休息一下!<br>{sec}/{max}秒.</h1>", unsafe_allow_html=True)
             time.sleep(1)
-            if self.bt_skip:
+            if self.bt_skip.button("跳过这个休息"):
                 break
         self.speak("Rest time's over! Get ready.")
 
