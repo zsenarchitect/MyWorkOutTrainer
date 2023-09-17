@@ -14,7 +14,7 @@ class WorkoutGuide:
             'Thursday': [[('Bicycle Crunches', 30), ('Leg Raise', 40)], [('Squats', 30), ('Lunges', 40)], [('Plank', 20), ('Side Plank', 20)], [('Push-up', 30), ('Sit-up', 40)]],
             'Friday': [[('Jumping Jacks', 30), ('Mountain Climbers', 30)], [('Push-up', 30), ('Sit-up', 40)], [('Squats', 30), ('Lunges', 40)], [('Plank', 20), ('Side Plank', 20)]],
             'Saturday': [[('Rest', 1)]],
-            'Sunday':  [[('Jumping Jacks', 3), ('Mountain Climbers', 5)]]
+            'Sunday':  [[('吃饭Jumping Jacks', 3), ('Mountain Climbers', 5)]]
         }
         # self.sound_file = BytesIO()
         # tts = gTTS('Add text-to-speech to your app', lang='en')
