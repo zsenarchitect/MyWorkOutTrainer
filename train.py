@@ -10,7 +10,7 @@ class WorkoutGuide:
             'Thursday': [[('Bicycle Crunches', 30), ('Leg Raise', 40)], [('Squats', 30), ('Lunges', 40)], [('Plank', 20), ('Side Plank', 20)], [('Push-up', 30), ('Sit-up', 40)]],
             'Friday': [[('Jumping Jacks', 30), ('Mountain Climbers', 30)], [('Push-up', 30), ('Sit-up', 40)], [('Squats', 30), ('Lunges', 40)], [('Plank', 20), ('Side Plank', 20)]],
             'Saturday': [[('Rest', 1)]],
-            'Sunday': [[('Rest', 1)]]
+            'Sunday':  [[('Jumping Jacks', 3), ('Mountain Climbers', 5)]]
         }
 
 
@@ -26,7 +26,7 @@ class WorkoutGuide:
         """, unsafe_allow_html=True)
 
 
-        
+
     def execute_workout(self):
         current_day = time.strftime("%A")
         st.write(f"Today is {current_day}, let's get started!")
