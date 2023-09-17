@@ -8,7 +8,7 @@ from io import BytesIO
 class WorkoutGuide:
     def __init__(self):
         self.workout_schedule = {
-            'Monday': [[('Push-up', 30), ('Sit-up', 40)], [('Squats', 30), ('Lunges', 40)], [('Plank', 20), ('Side Plank', 20)], [('Bicycle Crunches', 30), ('Leg Raise', 40)]],
+            'Monday': [[('Push-up宽鼻', 30), ('Sit-up', 40)], [('Squats', 30), ('Lunges', 40)], [('Plank', 20), ('Side Plank', 20)], [('Bicycle Crunches', 30), ('Leg Raise', 40)]],
             'Tuesday': [[('Squats', 30), ('Lunges', 40)], [('Push-up', 30), ('Sit-up', 40)], [('Bicycle Crunches', 30), ('Leg Raise', 40)], [('Plank', 20), ('Side Plank', 20)]],
             'Wednesday': [[('Plank', 20), ('Side Plank', 20)], [('Push-up', 30), ('Sit-up', 40)], [('Squats', 30), ('Lunges', 40)], [('Bicycle Crunches', 30), ('Leg Raise', 40)]],
             'Thursday': [[('Bicycle Crunches', 30), ('Leg Raise', 40)], [('Squats', 30), ('Lunges', 40)], [('Plank', 20), ('Side Plank', 20)], [('Push-up', 30), ('Sit-up', 40)]],
@@ -75,7 +75,7 @@ class WorkoutGuide:
         self.speak(f"Rest for {duration} seconds")
         max = duration
         for sec in range(duration, 0, -1):
-            placeholder.markdown(f"<h1 style='font-size:60px;'>Take a rest!<br>{sec}/{max} seconds.</h1>", unsafe_allow_html=True)
+            placeholder.markdown(f"<h1 style='font-size:90px;'>Take a rest!<br>{sec}/{max} seconds.</h1>", unsafe_allow_html=True)
             time.sleep(1)
         self.speak("Rest time's over! Get ready.")
 
