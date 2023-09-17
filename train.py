@@ -54,7 +54,10 @@ class WorkoutGuide:
         max = duration
         for sec in range(duration, 0, -1):
             placeholder.markdown(f"<h1>{exercise}<br>{sec}/{max} seconds.</h1>", unsafe_allow_html=True)
-            st.image(f"gifs/{exercise}.gif", width=400, caption=f"{exercise} in action")
+            try:
+                st.image(f"gifs/{exercise}.gif", width=400, caption=f"{exercise} in action")
+            except:
+                pass
             time.sleep(1)
         self.speak("Time's up! Next one.")
 
