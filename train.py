@@ -50,15 +50,17 @@ class WorkoutGuide:
     # Modified workout_timer and rest_timer with larger font size for countdown
     def workout_timer(self, duration, exercise, placeholder):
         self.speak(f"Start {exercise}")
+        max = duration
         for sec in range(duration, 0, -1):
-            placeholder.markdown(f"<h1 style='font-size:48px;'>{exercise}\n{sec} seconds.</h1>", unsafe_allow_html=True)
+            placeholder.markdown(f"<h1 style='font-size:48px;'>{exercise}\n{sec}/{max} seconds.</h1>", unsafe_allow_html=True)
             time.sleep(1)
         self.speak("Time's up! Next one.")
 
     def rest_timer(self, duration, placeholder):
         self.speak(f"Rest for {duration} seconds")
+        max = duration
         for sec in range(duration, 0, -1):
-            placeholder.markdown(f"<h1 style='font-size:48px;'>Take a rest!\n{sec} seconds.</h1>", unsafe_allow_html=True)
+            placeholder.markdown(f"<h1 style='font-size:48px;'>Take a rest!\n{sec}/{max} seconds.</h1>", unsafe_allow_html=True)
             time.sleep(1)
         self.speak("Rest time's over! Get ready.")
 
