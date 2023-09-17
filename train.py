@@ -6,7 +6,8 @@ from io import BytesIO
 
 
 class WorkoutGuide:
-    def __init__(self):
+    def __init__(self, is_gym):
+        self.is_gym = is_gym
 
         self.home_workout_schedule = {
             'Monday': [[('俄罗斯转体', 30), ('深蹲', 40)], 
@@ -32,8 +33,15 @@ class WorkoutGuide:
                         [('Squats', 30), ('Lunges', 40)], 
                         [('Plank', 20), ('Side Plank', 20)]],
             'Saturday': [[('Rest', 1)]],
-            'Sunday':  [[('吃饭Jumping Jacks', 3), ('Mountain Climbers', 5)]]
+            'Sunday':  [[('俄罗斯转体', 30), ('深蹲', 40)], 
+                       [('平躺交叉脚', 30), ('宽臂俯卧撑', 30)], 
+                       [('单脚站立右', 30), ('单脚站立左', 20)], 
+                       [('宽臂俯卧撑', 30), ('up dog down dog 拉伸', 30)], 
+                       [('侧身平板支撑左', 30), ('侧身平板支撑右', 30)], 
+                       [('宽臂俯卧撑', 30), ('俄罗斯转体', 30)]]
         }      
+
+        
         self.gym_workout_schedule = {
             'Monday': [[('坐举哑铃上举', 30), ('深蹲', 40)], 
                        [('两臂平举', 30), ('半仰哑铃上举', 30)], 
@@ -87,7 +95,8 @@ class WorkoutGuide:
         st.write(f"Today is {current_day}, let's get started!")
         
         # Display the full list of exercises for today
-        today_workout = self.gym_workout_schedule.get(current_day, [[('Rest', 1)]])
+        workout_data = self.gym_workout_schedule if self.is_gym else self.home_workout_schedule
+        today_workout = workout_data.get(current_day, [[('Rest', 1)]])
         st.write("Today's Exercises:")
         for group in today_workout:
             st.write(", ".join([exercise for exercise, _ in group]))
@@ -126,8 +135,11 @@ class WorkoutGuide:
 
 def main():
     st.title('Workout Guide')
-    if st.button('Start Workout'):
-        guide = WorkoutGuide()
+    if st.button('Start Gym Workout'):
+        guide = WorkoutGuide(is_gym = True)
+        guide.execute_workout()
+    if st.button('Start Home Workout'):
+        guide = WorkoutGuide(is_gym = False)
         guide.execute_workout()
 
 if __name__ == "__main__":
