@@ -1,5 +1,9 @@
 import streamlit as st
 import time
+from gtts import gTTS
+from io import BytesIO
+
+
 
 class WorkoutGuide:
     def __init__(self):
@@ -12,6 +16,10 @@ class WorkoutGuide:
             'Saturday': [[('Rest', 1)]],
             'Sunday':  [[('Jumping Jacks', 3), ('Mountain Climbers', 5)]]
         }
+        self.sound_file = BytesIO()
+        tts = gTTS('Add text-to-speech to your app', lang='en')
+        tts.write_to_fp(self.sound_file)
+        st.audio(self.sound_file)
 
 
       
@@ -24,6 +32,8 @@ class WorkoutGuide:
                 window.speechSynthesis.speak(msg);
             </script>
         """, unsafe_allow_html=True)
+        
+
 
 
 
@@ -65,7 +75,7 @@ class WorkoutGuide:
         self.speak(f"Rest for {duration} seconds")
         max = duration
         for sec in range(duration, 0, -1):
-            placeholder.markdown(f"<h1 style='font-size:48px;'>Take a rest!<br>{sec}/{max} seconds.</h1>", unsafe_allow_html=True)
+            placeholder.markdown(f"<h1 style='font-size:60px;'>Take a rest!<br>{sec}/{max} seconds.</h1>", unsafe_allow_html=True)
             time.sleep(1)
         self.speak("Rest time's over! Get ready.")
 
