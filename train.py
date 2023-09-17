@@ -102,7 +102,7 @@ class WorkoutGuide:
             st.write(", ".join([exercise for exercise, _ in group]))
         
         # Workout loop
-        self.bt_skip = st.empty()
+        # self.bt_skip = st.empty()
         placeholder = st.empty()
         for group in today_workout:
             for exercise, duration in group:
@@ -131,8 +131,11 @@ class WorkoutGuide:
         for sec in range(duration, 0, -1):
             placeholder.markdown(f"<h1 style='font-size:75px;'>休息一下!<br>{sec}/{max}秒.</h1>", unsafe_allow_html=True)
             time.sleep(1)
-            if self.bt_skip.button("跳过这个休息"):
-                break
+            try:
+                if st.button("跳过这个休息"):
+                    break
+            except:
+                pass
         self.speak("Rest time's over! Get ready.")
 
 
