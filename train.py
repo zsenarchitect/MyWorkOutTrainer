@@ -13,43 +13,34 @@ class WorkoutGuide:
             'Sunday': [[('Rest', 1)]]
         }
 
+
+      
     def speak(self, text):
-        st.write("""
-        <audio id='speech'></audio> 
-        <script>
-            function setVoiceAndSpeak(text) {
-                var synth = window.speechSynthesis;
-                var voices = synth.getVoices();
+        st.markdown(f"<p id='speech_text' style='display:none;'>{text}</p>", unsafe_allow_html=True)
+        st.markdown("""
+            <script>
+                var text = document.getElementById("speech_text").textContent;
                 var msg = new SpeechSynthesisUtterance(text);
-                
-                for (var i = 0; i < voices.length; i++) {
-                    if (voices[i].name === 'Google US English') {
-                        msg.voice = voices[i];
-                        break;
-                    }
-                }
-                synth.speak(msg);
-            }
-            
-            window.speechSynthesis.onvoiceschanged = function() {
-                setVoiceAndSpeak('""" + text + """');
-            };
-        </script>
+                window.speechSynthesis.speak(msg);
+            </script>
         """, unsafe_allow_html=True)
 
     def workout_timer(self, duration, exercise):
         self.speak(f"Start {exercise}")
+        placeholder = st.empty()
         for sec in range(duration, 0, -1):
-            st.write(f"{sec} seconds remaining.")
+            placeholder.text(f"{sec} seconds remaining.")
             time.sleep(1)
         self.speak("Time's up! Next one.")
 
     def rest_timer(self, duration):
         self.speak(f"Rest for {duration} seconds")
+        placeholder = st.empty()
         for sec in range(duration, 0, -1):
-            st.write(f"{sec} seconds remaining.")
+            placeholder.text(f"{sec} seconds remaining.")
             time.sleep(1)
         self.speak("Rest time's over! Get ready.")
+
 
     def execute_workout(self):
         current_day = time.strftime("%A")
