@@ -230,14 +230,14 @@ def main():
     st.markdown("<style>h1 { text-align: center; font-size:100px;}</style>", unsafe_allow_html=True)
 
 
-    st.title('Workout Guide')
+    st.title('张森练健身')
     # Spacer
     st.markdown("<br>", unsafe_allow_html=True)
 
-    if st.button('Start Gym Workout'):
+    if st.button('开始健身房训练'):
         guide = WorkoutGuide(is_gym = True)
         guide.execute_workout()
-    if st.button('Start Home Workout'):
+    if st.button('开始在家训练'):
         guide = WorkoutGuide(is_gym = False)
         guide.execute_workout()
 
