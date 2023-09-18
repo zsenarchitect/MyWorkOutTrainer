@@ -3,7 +3,10 @@ import time
 
 # from gtts import gTTS
 from io import BytesIO
-from gTTS import gTTS
+try:
+    from gTTS import gTTS
+except:
+    pass
 import os
 try:
     os.mkdir("temp")
