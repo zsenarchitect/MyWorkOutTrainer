@@ -166,6 +166,9 @@ class WorkoutGuide:
         # Workout loop
         # self.bt_skip = st.empty()
         placeholder = st.empty()
+        # Spacer
+        st.markdown("<br>", unsafe_allow_html=True)
+
         for group in today_workout:
             for exercise, duration in group:
                 self.rest_timer(8, placeholder, extra_text = f"下一个动作:<br>{exercise}")
@@ -228,6 +231,9 @@ def main():
 
 
     st.title('Workout Guide')
+    # Spacer
+    st.markdown("<br>", unsafe_allow_html=True)
+
     if st.button('Start Gym Workout'):
         guide = WorkoutGuide(is_gym = True)
         guide.execute_workout()
