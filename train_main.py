@@ -90,6 +90,7 @@ class WorkoutGuide:
         try:
             tts = gTTS(text, lang=output_language, tld="co.uk", slow=False)
         except:
+            print ("cannot speak")
             return
         try:
             my_file_name = text[0:20]
@@ -180,7 +181,7 @@ class WorkoutGuide:
         self.speak(f"Start {exercise}")
         max = duration
         for sec in range(duration, 0, -1):
-            placeholder.markdown(f"<h1  style='font-size:70px;'>{exercise}<br>{sec}/{max}秒.</h1>", unsafe_allow_html=True)
+            placeholder.markdown(f"<h1  style='font-size:75px;'>{exercise}<br>{sec}/{max}秒.</h1>", unsafe_allow_html=True)
             try:
                 st.image(f"gifs/{exercise}.gif", width=400, caption=f"{exercise} in action")
             except:
@@ -208,7 +209,7 @@ class WorkoutGuide:
 
     def play_sound(self, url = "https://www.orangefreesounds.com/wp-content/uploads/2022/04/Small-bell-ringing-short-sound-effect.mp3"):
         html_string = """
-            <audio controls autoplay>
+            <audio controls autoplay = "true">
                 <source src={} type="audio/mp3">
             </audio>
             """.format(url)
