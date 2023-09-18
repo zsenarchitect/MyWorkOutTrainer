@@ -167,7 +167,7 @@ class WorkoutGuide:
         # self.bt_skip = st.empty()
         placeholder = st.empty()
         # Spacer
-        st.markdown("<br>---------------------------<br><br>", unsafe_allow_html=True)
+        # st.markdown("<br>---------------------------<br><br>", unsafe_allow_html=True)
 
         for group in today_workout:
             for exercise, duration in group:
@@ -183,7 +183,7 @@ class WorkoutGuide:
         self.speak(f"Start {exercise}")
         max = duration
         for sec in range(duration, 0, -1):
-            placeholder.markdown(f"<h2>{exercise}<br>{sec}/{max}秒.</h2>", unsafe_allow_html=True)
+            placeholder.markdown(f"""<h2 style="text-align:center; font-size:70px;">{exercise}<br>{sec}/{max}秒.</h2>""", unsafe_allow_html=True)
             try:
                 st.image(f"gifs/{exercise}.gif", width=400, caption=f"{exercise} in action")
             except:
@@ -200,7 +200,7 @@ class WorkoutGuide:
         else:
             note = extra_text
         for sec in range(duration, 0, -1):
-            placeholder.markdown(f"<h2>{note}<br>{sec}/{max}秒.</h2>", unsafe_allow_html=True)
+            placeholder.markdown(f"""<h2 style="text-align:center; font-size:70px;">{note}<br>{sec}/{max}秒.</h2>""", unsafe_allow_html=True)
             time.sleep(1)
             # try:
             #     if st.button("跳过这个休息"):
@@ -218,7 +218,7 @@ class WorkoutGuide:
             """.format(url)
 
 
-        st.markdown("<br>-----<br>", unsafe_allow_html=True)
+        st.markdown("-----<br>", unsafe_allow_html=True)
         attr_name = "sound_{}".format(self.sound_counter)
         setattr(self, attr_name, st.empty())
         getattr(self, attr_name).markdown(html_string, unsafe_allow_html=True)
@@ -237,10 +237,10 @@ def main():
 
 
     title = st.empty()
-    title.markdown(f"<h1 style = <text-align: center;>张森<br>练健身</h1>", unsafe_allow_html=True)
+    title.markdown(f"""<h1 style = <text-align: center;>张森<br>练健身</h1>""", unsafe_allow_html=True)
     
     # Spacer
-    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("<br><br><br><br><br>", unsafe_allow_html=True)
 
     if st.button('开始健身房训练'):
         guide = WorkoutGuide(is_gym = True)
