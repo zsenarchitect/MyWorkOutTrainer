@@ -167,7 +167,7 @@ class WorkoutGuide:
         # self.bt_skip = st.empty()
         placeholder = st.empty()
         # Spacer
-        # st.markdown("<br>---------------------------<br><br>", unsafe_allow_html=True)
+        st.markdown("<br><br><br><br><br>", unsafe_allow_html=True)
 
         for group in today_workout:
             for exercise, duration in group:
