@@ -234,7 +234,7 @@ def main():
 
 
 
-    st.title('张森练健身')
+    st.title('Workout')
     # Spacer
     st.markdown("<br>", unsafe_allow_html=True)
 
