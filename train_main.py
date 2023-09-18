@@ -183,7 +183,7 @@ class WorkoutGuide:
         self.speak(f"Start {exercise}")
         max = duration
         for sec in range(duration, 0, -1):
-            placeholder.markdown(f"""<body style="text-align:center; font-size:70px;">{exercise}<br>{sec}/{max}秒.</body>""", unsafe_allow_html=True)
+            placeholder.markdown(f"""<body style="text-align:center; font-size:70px;font-weight:bold;">{exercise}<br>{sec}/{max}秒.</body>""", unsafe_allow_html=True)
             try:
                 st.image(f"gifs/{exercise}.gif", width=400, caption=f"{exercise} in action")
             except:
@@ -200,7 +200,7 @@ class WorkoutGuide:
         else:
             note = extra_text
         for sec in range(duration, 0, -1):
-            placeholder.markdown(f"""<body style="text-align:center; font-size:70px; color: orange">{note}<br>{sec}/{max}秒.</body>""", unsafe_allow_html=True)
+            placeholder.markdown(f"""<body style="text-align:center; font-size:70px; color: orange;font-weight:bold;">{note}<br>{sec}/{max}秒.</body>""", unsafe_allow_html=True)
             time.sleep(1)
             # try:
             #     if st.button("跳过这个休息"):
@@ -237,7 +237,7 @@ def main():
 
 
     title = st.empty()
-    title.markdown(f"""<h1 style = <text-align: center;>张森<br>练健身</h1>""", unsafe_allow_html=True)
+    title.markdown(f"""<body style = <text-align: center'font-size:100px; font-weight:bold;>张森<br>练健身</body>""", unsafe_allow_html=True)
     
     # Spacer
     st.markdown("<br><br><br><br><br>", unsafe_allow_html=True)
