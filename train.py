@@ -2,8 +2,12 @@ import streamlit as st
 import time
 # from gtts import gTTS
 from io import BytesIO
-
-
+from gtts import gTTS
+import os
+try:
+    os.mkdir("temp")
+except:
+    pass
 
 class WorkoutGuide:
     def __init__(self, is_gym):
@@ -77,7 +81,41 @@ class WorkoutGuide:
 
 
       
-    def speak(self, text):
+    def speak(self, text, is_chinese = True):
+        output_language = "zh-cn" if is_chinese else "en"
+        tts = gTTS(text, lang=output_language, tld="co.uk", slow=False)
+        try:
+            my_file_name = text[0:20]
+        except:
+            my_file_name = "audio"
+        my_file_name += "_{}".format(self.sound_counter)
+        tts.save(f"temp/{my_file_name}.mp3")
+        audio_file = open(f"temp/{my_file_name}.mp3", "rb")
+        # audio_bytes = audio_file.read()
+        # st.audio(audio_bytes, format="audio/mp3", start_time=0)
+        
+        with open(f"temp/{my_file_name}.mp3", "rb") as f:
+            data = f.read()
+            b64 = base64.b64encode(data).decode()
+            html_string = f"""
+                <audio controls autoplay="true">
+                <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
+                </audio>
+                """
+ 
+
+            attr_name = "tts_sound_{}".format(self.sound_counter)
+            setattr(self, attr_name, st.empty())
+            getattr(self, attr_name).markdown(html_string, unsafe_allow_html=True)
+
+            self.sound_counter += 1
+
+
+
+
+
+
+        return
         st.markdown(f"<p id='speech_text' style='display:none;'>{text}</p>", unsafe_allow_html=True)
         st.markdown("""
             <script>
