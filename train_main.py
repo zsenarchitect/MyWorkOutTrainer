@@ -222,6 +222,10 @@ class WorkoutGuide:
 
     
 def main():
+    st.markdown(
+    "<style>body { text-align: center; }</style>", 
+    unsafe_allow_html=True)
+
     st.title('Workout Guide')
     if st.button('Start Gym Workout'):
         guide = WorkoutGuide(is_gym = True)
