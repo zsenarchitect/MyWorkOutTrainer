@@ -26,7 +26,7 @@ class WorkoutGuide:
                        [('宽臂俯卧撑', 30), ('up dog down dog 拉伸', 30)], 
                        [('侧身平板支撑左', 30), ('侧身平板支撑右', 30)], 
                        [('宽臂俯卧撑', 30), ('俄罗斯转体', 30)]],
-            'Tuesday': [[('膝盖平板支撑', 30), ('Lunges', 40)], 
+            'Tuesday': [[('膝盖俯卧撑', 30), ('Lunges', 40)], 
                         [('Push-up', 30), ('Sit-up', 40)], 
                         [('Bicycle Crunches', 30), ('Leg Raise', 40)], 
                         [('Plank', 20), ('Side Plank', 20)]],
