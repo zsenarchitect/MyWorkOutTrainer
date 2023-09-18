@@ -3,7 +3,7 @@ import time
 
 # from gtts import gTTS
 from io import BytesIO
-from gtts import gTTS
+from gTTS import gTTS
 import os
 try:
     os.mkdir("temp")
