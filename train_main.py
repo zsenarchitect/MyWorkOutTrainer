@@ -183,7 +183,7 @@ class WorkoutGuide:
         self.speak(f"Start {exercise}")
         max = duration
         for sec in range(duration, 0, -1):
-            placeholder.markdown(f"""<h2 style="text-align:center; font-size:70px;">{exercise}<br>{sec}/{max}秒.</h2>""", unsafe_allow_html=True)
+            placeholder.markdown(f"""<body style="text-align:center; font-size:70px;">{exercise}<br>{sec}/{max}秒.</body>""", unsafe_allow_html=True)
             try:
                 st.image(f"gifs/{exercise}.gif", width=400, caption=f"{exercise} in action")
             except:
@@ -200,7 +200,7 @@ class WorkoutGuide:
         else:
             note = extra_text
         for sec in range(duration, 0, -1):
-            placeholder.markdown(f"""<h2 style="text-align:center; font-size:70px;">{note}<br>{sec}/{max}秒.</h2>""", unsafe_allow_html=True)
+            placeholder.markdown(f"""<body style="text-align:center; font-size:70px; color: orange">{note}<br>{sec}/{max}秒.</body>""", unsafe_allow_html=True)
             time.sleep(1)
             # try:
             #     if st.button("跳过这个休息"):
