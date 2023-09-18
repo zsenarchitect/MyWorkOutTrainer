@@ -234,7 +234,7 @@ def main():
 
 
     title = st.empty()
-    title.markdown(f"<h1>张森练健身</h1>", unsafe_allow_html=True)
+    title.markdown(f"<h1 style = <text-align: center;>张森练健身</h1>", unsafe_allow_html=True)
     
     # Spacer
     st.markdown("<br>", unsafe_allow_html=True)
