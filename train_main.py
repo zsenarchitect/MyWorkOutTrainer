@@ -138,7 +138,6 @@ class WorkoutGuide:
 
 
     def execute_workout(self):
-        st.markdown("<style>h1 { text-align: center; }</style>", unsafe_allow_html=True)
         # Get current time in UTC
         utc_now = datetime.utcnow()
 
@@ -225,6 +224,8 @@ def main():
     st.markdown(
     "<style>body { text-align: center; }</style>", 
     unsafe_allow_html=True)
+    st.markdown("<style>h1 { text-align: center; font-size:100px;}</style>", unsafe_allow_html=True)
+
 
     st.title('Workout Guide')
     if st.button('Start Gym Workout'):
