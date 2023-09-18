@@ -226,15 +226,15 @@ class WorkoutGuide:
 def main():
     st.markdown( """<style>
                 body { text-align: center; }
-                h1 { text-align: center; font-size: 100px; color: orange}
-                h2 { text-align: center; font-size: 75px; }
+                h1 {font-size: 100px; color: orange; text-align: center; }
+                h2 {  font-size: 75px;  text-align: center; }
                 </style>""", unsafe_allow_html=True)
     # st.markdown("<style>h1 { text-align: center; font-size:100px;}</style>", unsafe_allow_html=True)
     # st.markdown("<style>h2 { text-align: center; font-size:75px;}</style>", unsafe_allow_html=True)
 
 
     title = st.empty()
-    title.markdown(f"<h3 style = <text-align: center;>张森练健身</h3>", unsafe_allow_html=True)
+    title.markdown(f"<h1 style = <text-align: center;>张森练健身</h1>", unsafe_allow_html=True)
     
     # Spacer
     st.markdown("<br>", unsafe_allow_html=True)
