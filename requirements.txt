@@ -1,2 +1,2 @@
-streamlit
-gTTS==2.2.2
+gTTS==2.2.4
+streamlit==1.11.1
