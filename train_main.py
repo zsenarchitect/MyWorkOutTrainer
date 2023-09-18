@@ -167,7 +167,7 @@ class WorkoutGuide:
         # self.bt_skip = st.empty()
         placeholder = st.empty()
         # Spacer
-        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown("<br><br><br>", unsafe_allow_html=True)
 
         for group in today_workout:
             for exercise, duration in group:
@@ -224,9 +224,13 @@ class WorkoutGuide:
 
     
 def main():
-    st.markdown( "<style>body { text-align: center; }</style>", unsafe_allow_html=True)
-    st.markdown("<style>h1 { text-align: center; font-size:20px;}</style>", unsafe_allow_html=True)
-    st.markdown("<style>h2 { text-align: center; font-size:75px;}</style>", unsafe_allow_html=True)
+    st.markdown( """<style>
+                body { text-align: center; }
+                h1 { text-align: center; font-size: 100px; }
+                h2 { text-align: center; font-size: 75px; }
+                </style>""", unsafe_allow_html=True)
+    # st.markdown("<style>h1 { text-align: center; font-size:100px;}</style>", unsafe_allow_html=True)
+    # st.markdown("<style>h2 { text-align: center; font-size:75px;}</style>", unsafe_allow_html=True)
 
 
 
