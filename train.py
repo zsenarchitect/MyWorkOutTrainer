@@ -1,6 +1,6 @@
 import streamlit as st
 import time
-
+from datetime import datetime, timedelta
 # from gtts import gTTS
 from io import BytesIO
 try:
@@ -138,7 +138,22 @@ class WorkoutGuide:
 
     def execute_workout(self):
         st.markdown("<style>h1 { text-align: center; }</style>", unsafe_allow_html=True)
-        current_day = time.strftime("%A")
+        # Get current time in UTC
+        utc_now = datetime.utcnow()
+
+        # UTC offset for US Eastern Time (EST/EDT)
+        # EST is UTC-5, EDT is UTC-4
+        if time.localtime().tm_isdst:
+            offset = timedelta(hours=-4)
+        else:
+            offset = timedelta(hours=-5)
+
+        # Convert to US Eastern Time
+        eastern_now = utc_now + offset
+
+        # Get the weekday name
+        current_day = eastern_now.strftime("%A")
+        # current_day = time.strftime("%A")
         st.write(f"Today is {current_day}, let's get started!")
         
         # Display the full list of exercises for today
