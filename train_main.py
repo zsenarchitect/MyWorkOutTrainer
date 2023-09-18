@@ -226,7 +226,7 @@ class WorkoutGuide:
 def main():
     st.markdown( """<style>
                 body { text-align: center; }
-                h1 { text-align: center; font-size: 100px; }
+                h1 { text-align: right; font-size: 100px; }
                 h2 { text-align: center; font-size: 75px; }
                 </style>""", unsafe_allow_html=True)
     # st.markdown("<style>h1 { text-align: center; font-size:100px;}</style>", unsafe_allow_html=True)
@@ -234,7 +234,7 @@ def main():
 
 
 
-    st.title('Workout')
+    st.title('张森练健身')
     # Spacer
     st.markdown("<br>", unsafe_allow_html=True)
 
