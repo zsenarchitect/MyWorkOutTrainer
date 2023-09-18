@@ -87,7 +87,10 @@ class WorkoutGuide:
       
     def speak(self, text, is_chinese = True):
         output_language = "zh-cn" if is_chinese else "en"
-        tts = gTTS(text, lang=output_language, tld="co.uk", slow=False)
+        try:
+            tts = gTTS(text, lang=output_language, tld="co.uk", slow=False)
+        except:
+            return
         try:
             my_file_name = text[0:20]
         except:
