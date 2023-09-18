@@ -167,7 +167,7 @@ class WorkoutGuide:
         # self.bt_skip = st.empty()
         placeholder = st.empty()
         # Spacer
-        st.markdown("<br><br><br>", unsafe_allow_html=True)
+        st.markdown("<br>---------------------------<br><br>", unsafe_allow_html=True)
 
         for group in today_workout:
             for exercise, duration in group:
@@ -208,6 +208,7 @@ class WorkoutGuide:
             # except:
             #     pass
         self.speak("Rest time's over! Get ready.")
+        self.play_sound()
 
     def play_sound(self, url = "https://www.orangefreesounds.com/wp-content/uploads/2022/04/Small-bell-ringing-short-sound-effect.mp3"):
         html_string = """
@@ -227,14 +228,14 @@ def main():
     st.markdown( """<style>
                 body { text-align: center; }
                 h1 {font-size: 100px; color: orange; text-align: center; }
-                h2 {  font-size: 75px;  text-align: center; }
+                h2 {  font-size: 70px;  text-align: center; }
                 </style>""", unsafe_allow_html=True)
     # st.markdown("<style>h1 { text-align: center; font-size:100px;}</style>", unsafe_allow_html=True)
     # st.markdown("<style>h2 { text-align: center; font-size:75px;}</style>", unsafe_allow_html=True)
 
 
     title = st.empty()
-    title.markdown(f"<h1 style = <text-align: center;>张森练健身</h1>", unsafe_allow_html=True)
+    title.markdown(f"<h1 style = <text-align: center;>张森<br>练健身</h1>", unsafe_allow_html=True)
     
     # Spacer
     st.markdown("<br>", unsafe_allow_html=True)
