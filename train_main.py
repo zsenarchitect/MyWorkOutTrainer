@@ -8,6 +8,7 @@ try:
 except:
     pass
 import os
+import json
 try:
     os.mkdir("temp")
 except:
@@ -158,32 +159,55 @@ class WorkoutGuide:
         
         # Display the full list of exercises for today
         workout_data = self.gym_workout_schedule if self.is_gym else self.home_workout_schedule
-        today_workout = workout_data.get(current_day, [[('Rest', 1)]])
+        self.today_workout = workout_data.get(current_day, [[('Rest', 1)]])
         st.write("Today's Exercises:")
         for group in today_workout:
             st.write(", ".join([exercise for exercise, _ in group]))
         
         # Workout loop
         # self.bt_skip = st.empty()
-        placeholder = st.empty()
+        self.main_placeholder_display = st.empty()
         # Spacer
         st.markdown("<br><br><br><br><br>", unsafe_allow_html=True)
 
-        for group in today_workout:
+        for group in self.today_workout:
             for exercise, duration in group:
-                self.rest_timer(8, placeholder, extra_text = f"下一个动作:<br>{exercise}")
-                self.workout_timer(duration, exercise, placeholder)
-            self.rest_timer(40, placeholder)
+                self.rest_timer(8, extra_text = f"下一个动作:<br>{exercise}")
+                self.workout_timer(duration, exercise)
+            self.rest_timer(40)
 
-        st.write("Well done, you've crushed it today!")
+        note ="Well done!<br>You've crushed it today!"
+        self.main_placeholder_display.markdown(f"""<body style="text-align:center; font-size:80px; color: white;font-weight:bold;">{note}</body>""", unsafe_allow_html=True)
+
         self.speak("Well done, you've crushed it today!")
 
+    def log_training(self):
+        pass
+        # open "training_log.json" and append the current day's exercises to it, depending on the current session is in gym or in home
+        # log the date, if this is gym or home, and the count of all actions today
+        with open("training_log.json", "r") as f:
+            data = json.load(f)
+            # get today's date
+            data.get("dates", []).append(datetime.now().strftime("%Y-%m-%d"))
+
+            action_data = data.get("action_data", {})
+            for group in self.today_workout:
+                for exercise, duration in group:
+                    if exercise in action_data:
+                        action_data[exercise] += 1
+                    else:
+                        action_data[exercise] = 1
+        
+        with open("training_log.json", "w") as f:
+            json.dump(data, f, indent=4)
+
+
     # Modified workout_timer and rest_timer with larger font size for countdown
-    def workout_timer(self, duration, exercise, placeholder):
+    def workout_timer(self, duration, exercise):
         self.speak(f"Start {exercise}")
         max = duration
         for sec in range(duration, 0, -1):
-            placeholder.markdown(f"""<body style="text-align:center; font-size:70px;font-weight:bold;">{exercise}<br>{sec}/{max}秒.</body>""", unsafe_allow_html=True)
+            self.main_placeholder_display.markdown(f"""<body style="text-align:center; font-size:70px;font-weight:bold;">{exercise}<br>{sec}/{max}秒.</body>""", unsafe_allow_html=True)
             try:
                 st.image(f"gifs/{exercise}.gif", width=400, caption=f"{exercise} in action")
             except:
@@ -192,7 +216,7 @@ class WorkoutGuide:
         self.speak("Time's up! Next one.")
         self.play_sound()
 
-    def rest_timer(self, duration, placeholder, extra_text = None):
+    def rest_timer(self, duration, extra_text = None):
         self.speak(f"Rest for {duration} seconds")
         max = duration
         if not extra_text:
@@ -200,7 +224,7 @@ class WorkoutGuide:
         else:
             note = extra_text
         for sec in range(duration, 0, -1):
-            placeholder.markdown(f"""<body style="text-align:center; font-size:70px; color: orange;font-weight:bold;">{note}<br>{sec}/{max}秒.</body>""", unsafe_allow_html=True)
+            self.main_placeholder_display.markdown(f"""<body style="text-align:center; font-size:70px; color: orange;font-weight:bold;">{note}<br>{sec}/{max}秒.</body>""", unsafe_allow_html=True)
             time.sleep(1)
             # try:
             #     if st.button("跳过这个休息"):
