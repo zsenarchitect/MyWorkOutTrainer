@@ -161,7 +161,7 @@ class WorkoutGuide:
         workout_data = self.gym_workout_schedule if self.is_gym else self.home_workout_schedule
         self.today_workout = workout_data.get(current_day, [[('Rest', 1)]])
         st.write("Today's Exercises:")
-        for group in today_workout:
+        for group in self.today_workout:
             st.write(", ".join([exercise for exercise, _ in group]))
         
         # Workout loop
