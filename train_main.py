@@ -234,7 +234,12 @@ class WorkoutGuide:
         self.speak("Rest time's over! Get ready.")
         self.play_sound()
 
-    def play_sound(self, url = "https://www.orangefreesounds.com/wp-content/uploads/2022/04/Small-bell-ringing-short-sound-effect.mp3"):
+    def play_sound(self, url = None):
+        if not url:
+            # default ring sounds
+            url = "https://www.orangefreesounds.com/wp-content/uploads/2022/04/Small-bell-ringing-short-sound-effect.mp3"
+
+
         html_string = """
             <audio controls autoplay = "true">
                 <source src={} type="audio/mp3">
@@ -267,11 +272,11 @@ def main():
     st.markdown("<br><br><br><br><br>", unsafe_allow_html=True)
 
     if st.button('开始健身房训练'):
-        guide = WorkoutGuide(is_gym = True)
-        guide.execute_workout()
+        is_gym = True
     if st.button('开始在家训练'):
-        guide = WorkoutGuide(is_gym = False)
-        guide.execute_workout()
+        is_gym = False
+    guide = WorkoutGuide(is_gym)
+    guide.execute_workout()
 
 if __name__ == "__main__":
     
