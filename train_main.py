@@ -271,12 +271,17 @@ def main():
     # Spacer
     st.markdown("<br><br><br><br><br>", unsafe_allow_html=True)
 
+    is_started = False
     if st.button('开始健身房训练'):
         is_gym = True
+        is_started = True
     if st.button('开始在家训练'):
         is_gym = False
-    guide = WorkoutGuide(is_gym)
-    guide.execute_workout()
+        is_started = True
+    
+    if is_started:
+        guide = WorkoutGuide(is_gym)
+        guide.execute_workout()
 
 if __name__ == "__main__":
     
