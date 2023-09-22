@@ -1,6 +1,7 @@
 import streamlit as st
 import time
 from datetime import datetime, timedelta
+import pprint
 # from gtts import gTTS
 from io import BytesIO
 try:
@@ -16,6 +17,11 @@ except:
 
 class WorkoutGuide:
     def __init__(self, is_gym):
+        data = self.read_log()
+        for key,value in data.items():
+            st.write("{}:{}".format(key,value))
+
+
         self.is_gym = is_gym
         self.sound_counter = 0
         
@@ -181,6 +187,11 @@ class WorkoutGuide:
 
         self.speak("Well done, you've crushed it today!")
 
+
+    def read_log(self):
+        with open("training_log.json", "r") as f:
+            return json.load(f)
+        
     def log_training(self):
         pass
         # open "training_log.json" and append the current day's exercises to it, depending on the current session is in gym or in home
@@ -256,6 +267,7 @@ class WorkoutGuide:
 
     
 def main():
+    
     st.markdown( """<style>
                 body { text-align: center; }
                 h1 {font-size: 100px; color: orange; text-align: center; }
