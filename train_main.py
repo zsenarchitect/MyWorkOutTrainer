@@ -32,6 +32,9 @@ class WorkoutGuide:
 
         self.is_gym = is_gym
         self.sound_counter = 0
+
+        with open("set_data.json", "r") as f:
+            self.training_set = json.load(f)
         
 
         self.home_workout_schedule = {
@@ -49,10 +52,10 @@ class WorkoutGuide:
                         [('Push-up', 30), ('Sit-up', 40)], 
                         [('Squats', 30), ('Lunges', 40)], 
                         [('Bicycle Crunches', 30), ('Leg Raise', 40)]],
-            'Thursday': [[('Bicycle Crunches', 30), ('Leg Raise', 40)],
-                        [('Squats', 30), ('Lunges', 40)], 
-                        [('Plank', 20), ('Side Plank', 20)], 
-                        [('Push-up', 30), ('Sit-up', 40)]],
+            'Thursday': [('Bicycle Crunches', 'Leg Raise'),
+                        ('Squats', 'Lunges'), 
+                        ('Plank', 'Side Plank'), 
+                        ('Push-up', 'Sit-up')],
             'Friday': [[('Jumping Jacks', 30), ('Mountain Climbers', 30)],
                         [('Push-up', 30), ('Sit-up', 40)], 
                         [('Squats', 30), ('Lunges', 40)], 
@@ -176,7 +179,7 @@ class WorkoutGuide:
         self.today_workout = workout_data.get(current_day, [[('Rest', 1)]])
         st.write("Today's Exercises:")
         for group in self.today_workout:
-            st.write(", ".join([exercise for exercise, _ in group]))
+            st.write(", ".join( group))
         
         # Workout loop
         # self.bt_skip = st.empty()
@@ -185,8 +188,9 @@ class WorkoutGuide:
         st.markdown("<br><br><br><br><br>", unsafe_allow_html=True)
 
         for group in self.today_workout:
-            for exercise, duration in group:
-                self.rest_timer(8, extra_text = f"下一个动作:<br>{exercise}")
+            for exercise in group:
+                duration  = self.training_set.get(exercise, 30)
+                self.rest_timer(10, extra_text = f"下一个动作:<br>{exercise}")
                 self.workout_timer(duration, exercise)
             self.rest_timer(40)
 
