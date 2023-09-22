@@ -52,10 +52,10 @@ class WorkoutGuide:
                         [('Push-up', 30), ('Sit-up', 40)], 
                         [('Squats', 30), ('Lunges', 40)], 
                         [('Bicycle Crunches', 30), ('Leg Raise', 40)]],
-            'Thursday': [('Bicycle Crunches', 'Leg Raise'),
-                        ('Squats', 'Lunges'), 
-                        ('Plank', 'Side Plank'), 
-                        ('Push-up', 'Sit-up')],
+            'Thursday': [['Bicycle Crunches', 'Leg Raise'],
+                        ['Squats', 'Lunges'], 
+                        ['Plank', 'Side Plank'], 
+                        ['Push-up', 'Sit-up']],
             'Friday': [[('Jumping Jacks', 30), ('Mountain Climbers', 30)],
                         [('Push-up', 30), ('Sit-up', 40)], 
                         [('Squats', 30), ('Lunges', 40)], 
@@ -180,7 +180,7 @@ class WorkoutGuide:
         st.write("Today's Exercises:")
         for group in self.today_workout:
             print (group)
-            st.write(", ".join( list(group)))
+            st.write(", ".join( group))
         
         # Workout loop
         # self.bt_skip = st.empty()
