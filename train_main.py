@@ -179,7 +179,8 @@ class WorkoutGuide:
         self.today_workout = workout_data.get(current_day, [[('Rest', 1)]])
         st.write("Today's Exercises:")
         for group in self.today_workout:
-            st.write(", ".join( group))
+            print (group)
+            st.write(", ".join( list(group)))
         
         # Workout loop
         # self.bt_skip = st.empty()
