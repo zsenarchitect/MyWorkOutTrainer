@@ -55,19 +55,9 @@ class WorkoutGuide:
                        ['侧身平板支撑左', '侧身平板支撑右'], 
                        ['宽臂俯卧撑', '俄罗斯转体']],
             'Thursday': 'Monday',
-            'Friday': [['俄罗斯转体', '深蹲'], 
-                       ['平躺交叉脚', '宽臂俯卧撑'], 
-                       ['单脚站立右', '单脚站立左'], 
-                       ['宽臂俯卧撑', 'up dog down dog 拉伸'], 
-                       ['侧身平板支撑左', '侧身平板支撑右'], 
-                       ['宽臂俯卧撑', '俄罗斯转体']],
-            'Saturday': [['Rest', 1]],
-            'Sunday':  [['俄罗斯转体', '深蹲'], 
-                       ['平躺交叉脚', '宽臂俯卧撑'], 
-                       ['单脚站立右', '单脚站立左'], 
-                       ['宽臂俯卧撑', 'up dog down dog 拉伸',], 
-                       ['侧身平板支撑左', '侧身平板支撑右',], 
-                       ['宽臂俯卧撑', '俄罗斯转体',]]
+            'Friday': "Tuesday",
+            'Saturday': [['Rest']],
+            'Sunday':  "Wednesday"
         }      
 
 
@@ -86,17 +76,11 @@ class WorkoutGuide:
                         ['Push-up', 'Sit-up'], 
                         ['Squats', 'Lunges'], 
                         ['Bicycle Crunches', 'Leg Raise']],
-            'Thursday': [['Bicycle Crunches', 'Leg Raise'],
-                        ['Squats', 'Lunges'], 
-                        ['Plank', 'Side Plank'], 
-                        ['Push-up', 'Sit-up']],
-            'Friday': [['Jumping Jacks', 'Mountain Climbers'],
-                        ['Push-up', 'Sit-up'], 
-                        ['Squats', 'Lunges'], 
-                        ['Plank', 'Side Plank']],
+            'Thursday': 'Monday',
+            'Friday': "Tuesday",
             'Saturday': [['Rest']],
-            'Sunday':  [['吃饭Jumping Jacks', 'Mountain Climbers']]
-        }
+            'Sunday':  "Wednesday"
+            }
         # self.sound_file = BytesIO()
         # tts = gTTS('Add text-to-speech to your app', lang='en')
         # tts.write_to_fp(self.sound_file)
@@ -177,9 +161,9 @@ class WorkoutGuide:
         
         # Display the full list of exercises for today
         workout_data = self.gym_workout_schedule if self.is_gym else self.home_workout_schedule
-        self.today_workout = workout_data.get(current_day, [[('Rest', 1)]])
+        self.today_workout = workout_data.get(current_day, [[('Missing day', 33)]])
         if isinstance(self.today_workout, str):
-            self.today_workout = workout_data.get(self.today_workout, [[('Rest', 1)]])
+            self.today_workout = workout_data.get(self.today_workout, [[('Missing', 27)]])
         
         st.write("Today's Exercises:")
         for group in self.today_workout:
@@ -191,6 +175,9 @@ class WorkoutGuide:
         self.main_placeholder_display = st.empty()
         # Spacer
         st.markdown("<br><br><br><br><br>", unsafe_allow_html=True)
+        self.debug_text = st.empty()
+        
+        self.self_check()
 
         for group in self.today_workout:
             for exercise in group:
@@ -203,6 +190,13 @@ class WorkoutGuide:
         self.main_placeholder_display.markdown(f"""<body style="text-align:center; font-size:80px; color: white;font-weight:bold;">{note}</body>""", unsafe_allow_html=True)
 
         self.speak("Well done, you've crushed it today!")
+
+    def self_check(self):
+        pass
+        # for all the action from self.setting_map, make sure all of the key there is being used at least once in home schdule and gym scheduele.
+        # if not, show them in self.debug_text
+        self.debug_text.text = "OK"
+
 
 
     def read_log(self):
