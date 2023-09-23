@@ -284,22 +284,24 @@ class WorkoutGuide:
     
     def reader_out(self, exercise, is_next = False):
         if is_next:
-            file = f"next_{exercise}.mp3"
+            file_path = f"next_{exercise}.mp3"
         else:
-            file = f"start_{exercise}.mp3"
+            file_path = f"start_{exercise}.mp3"
         
+        with open(file_path, "rb") as f:
+            data = f.read()
+            b64 = base64.b64encode(data).decode()
+            md = f"""
+                <audio controls autoplay="true">
+                <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
+                </audio>
+                """
         
-        html_string = """
-            <audio controls autoplay = "true">
-                <source src={} type="audio/mp3">
-            </audio>
-            """.format(file)
-
 
         st.markdown("-----<br>", unsafe_allow_html=True)
         attr_name = "sound_{}".format(self.sound_counter)
         setattr(self, attr_name, st.empty())
-        getattr(self, attr_name).markdown(html_string, unsafe_allow_html=True)
+        getattr(self, attr_name).markdown(md, unsafe_allow_html=True)
 
         self.sound_counter += 1
 
