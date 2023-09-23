@@ -183,7 +183,7 @@ class WorkoutGuide:
         for group in self.today_workout:
             for exercise in group:
                 duration  = self.training_set.get(exercise, 29)
-
+                
                 self.reader_out(exercise, is_next = True)
                 self.rest_timer(10, extra_text = f"下一个动作:<br>{exercise}")
 
@@ -288,6 +288,9 @@ class WorkoutGuide:
         else:
             file_path = f"start_{exercise}.mp3"
         
+        if not os.path.exists(file_path):
+            return
+
         with open(file_path, "rb") as f:
             data = f.read()
             b64 = base64.b64encode(data).decode()
