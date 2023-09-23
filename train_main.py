@@ -266,6 +266,9 @@ class WorkoutGuide:
             # default ring sounds
             url = "https://www.orangefreesounds.com/wp-content/uploads/2022/04/Small-bell-ringing-short-sound-effect.mp3"
 
+        #https://cp.sync.com/mfs-60:17a21c594d1a7553c5a0352d2633d8d8=============================/u/next_%E5%8D%8A%E4%BB%B0%E5%93%91%E9%93%83%E4%B8%8A%E4%B8%BE.mp3?cachekey=60:17a21c594d1a7553c5a0352d2633d8d8=============================&datakey=WdMRuax3ta96cxCO9hLCy2LvjwirjdzO35ZAWKhItXn3ls52Dm7xZNKWr2G9ORN/N/26BcGdeES997GEFxchDjeMDL+r3cRHMBXaJU6wFzEbF56owV/XlQGWaFHbL4xyHTPL2qCv3lDKyZvQRTBUJKi7NQL0Q5Ofke8J4HQjqSFrXLi2wY2eRP3jfuIibzHw6xxqbpIfujGikIrwdymuY4oCWNdEjshBqj8/GkUaAH2mfYLjoGUPz9XZGT1DRg2YT3Ex8JIXlUpFtfbu8usFrWgXBO1BqPqswlQTEuuYhgm28GQOLTsMwnJc74GTAuDVcB8xNY3MVO/heaLo1Hww1w&mode=101&api_version=1&header1=Q29udGVudC1UeXBlOiBhdWRpby9tcGVn&header2=Q29udGVudC1EaXNwb3NpdGlvbjogaW5saW5lOyBmaWxlbmFtZT0ibmV4dF8lRTUlOEQlOEElRTQlQkIlQjAlRTUlOTMlOTElRTklOTMlODMlRTQlQjglOEElRTQlQjglQkUubXAzIjtmaWxlbmFtZSo9VVRGLTgnJ25leHRfJUU1JThEJThBJUU0JUJCJUIwJUU1JTkzJTkxJUU5JTkzJTgzJUU0JUI4JThBJUU0JUI4JUJFLm1wMzs&servtime=1695439522723&engine=cp-3.1.38&userid=2141860011&deviceid=4747950011&devicetypeid=3&access_token=3a608bbd02263318b8b85da9e4a086ddc31484ccb2aed67d9fdb2f22817874dd
+
+        #https://cp.sync.com/mfs-60:8327c6c348789e2d445a632e7f258132=============================/u/next_%E4%BF%84%E7%BD%97%E6%96%AF%E8%BD%AC%E4%BD%93.mp3?cachekey=60:8327c6c348789e2d445a632e7f258132=============================&datakey=FDwLrncnj6DOAx6HqaQNQIdfpHICq9vDOpaS/RsdV/npGKahk6SptZmLspfLZUkWlAOqHc5PB0p0PfJj7pii2fdti+vI/rJXzmR2B4oA1KmEibkIdbiEzod5mAOZWlO3CXWZk19+bj+8Qd0hp1jNTaG5CSFvALISfG1spL/QByryAa7kwLpZSdbtKnsAuZlAnvoGnftgJFGSTPbSb9YPsrT2llbPz70KsHi3VpQD/p3OH8USvucdNG3Rd4sqU2G4dZjZyGuWyjfDgAdwhgYn28YXouR9C2tSw3gsyHnyuhrdhI1541/lc0ZNgKXp6rcpaDfsMeg/0UEqvEgT+2ieJA&mode=101&api_version=1&header1=Q29udGVudC1UeXBlOiBhdWRpby9tcGVn&header2=Q29udGVudC1EaXNwb3NpdGlvbjogaW5saW5lOyBmaWxlbmFtZT0ibmV4dF8lRTQlQkYlODQlRTclQkQlOTclRTYlOTYlQUYlRTglQkQlQUMlRTQlQkQlOTMubXAzIjtmaWxlbmFtZSo9VVRGLTgnJ25leHRfJUU0JUJGJTg0JUU3JUJEJTk3JUU2JTk2JUFGJUU4JUJEJUFDJUU0JUJEJTkzLm1wMzs&servtime=1695439602660&engine=cp-3.1.38&userid=2141860011&deviceid=4747950011&devicetypeid=3&access_token=3a608bbd02263318b8b85da9e4a086ddc31484ccb2aed67d9fdb2f22817874dd
 
         html_string = """
             <audio controls autoplay = "true">
@@ -284,13 +287,15 @@ class WorkoutGuide:
     
     def reader_out(self, exercise, is_next = False):
         if is_next:
-            file_path = f"next_{exercise}.mp3"
+            file_path = f"audios\\next_{exercise}.mp3"
         else:
-            file_path = f"start_{exercise}.mp3"
+            file_path = f"audios\\start_{exercise}.mp3"
         
         if not os.path.exists(file_path):
             return
 
+
+        # url  = f"https://cp.sync.com/mfs-60:8327c6c348789e2d445a632e7f258132=============================/u/{file_path}?cachekey=60:8327c6c348789e2d445a632e7f258132=============================&datakey=FDwLrncnj6DOAx6HqaQNQIdfpHICq9vDOpaS/RsdV/npGKahk6SptZmLspfLZUkWlAOqHc5PB0p0PfJj7pii2fdti+vI/rJXzmR2B4oA1KmEibkIdbiEzod5mAOZWlO3CXWZk19+bj+8Qd0hp1jNTaG5CSFvALISfG1spL/QByryAa7kwLpZSdbtKnsAuZlAnvoGnftgJFGSTPbSb9YPsrT2llbPz70KsHi3VpQD/p3OH8USvucdNG3Rd4sqU2G4dZjZyGuWyjfDgAdwhgYn28YXouR9C2tSw3gsyHnyuhrdhI1541/lc0ZNgKXp6rcpaDfsMeg/0UEqvEgT+2ieJA&mode=101&api_version=1&header1=Q29udGVudC1UeXBlOiBhdWRpby9tcGVn&header2=Q29udGVudC1EaXNwb3NpdGlvbjogaW5saW5lOyBmaWxlbmFtZT0ibmV4dF8lRTQlQkYlODQlRTclQkQlOTclRTYlOTYlQUYlRTglQkQlQUMlRTQlQkQlOTMubXAzIjtmaWxlbmFtZSo9VVRGLTgnJ25leHRfJUU0JUJGJTg0JUU3JUJEJTk3JUU2JTk2JUFGJUU4JUJEJUFDJUU0JUJEJTkzLm1wMzs&servtime=1695439602660&engine=cp-3.1.38&userid=2141860011&deviceid=4747950011&devicetypeid=3&access_token=3a608bbd02263318b8b85da9e4a086ddc31484ccb2aed67d9fdb2f22817874dd"
         with open(file_path, "rb") as f:
             data = f.read()
             b64 = base64.b64encode(data).decode()
