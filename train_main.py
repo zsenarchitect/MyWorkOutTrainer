@@ -1,5 +1,6 @@
 import streamlit as st
 import time
+import io
 from datetime import datetime, timedelta
 import pprint
 # from gtts import gTTS
@@ -33,7 +34,7 @@ class WorkoutGuide:
         self.is_gym = is_gym
         self.sound_counter = 0
 
-        with open("set_data.json", "r") as f:
+        with io.open("set_data.json", "r", encoding="utf-8") as f:
             self.training_set = json.load(f)
         
 
@@ -182,7 +183,11 @@ class WorkoutGuide:
         for group in self.today_workout:
             for exercise in group:
                 duration  = self.training_set.get(exercise, 29)
+
+                self.reader_out(exercise, is_next = True)
                 self.rest_timer(10, extra_text = f"下一个动作:<br>{exercise}")
+
+                self.reader_out(exercise, is_next = False)
                 self.workout_timer(duration, exercise)
             self.rest_timer(40)
 
@@ -277,6 +282,27 @@ class WorkoutGuide:
         self.sound_counter += 1
 
     
+    def reader_out(self, exercise, is_next = False):
+        if is_next:
+            file = f"next_{exercise}.mp3"
+        else:
+            file = f"start_{exercise}.mp3"
+        
+        
+        html_string = """
+            <audio controls autoplay = "true">
+                <source src={} type="audio/mp3">
+            </audio>
+            """.format(file)
+
+
+        st.markdown("-----<br>", unsafe_allow_html=True)
+        attr_name = "sound_{}".format(self.sound_counter)
+        setattr(self, attr_name, st.empty())
+        getattr(self, attr_name).markdown(html_string, unsafe_allow_html=True)
+
+        self.sound_counter += 1
+
 def main():
     
     st.markdown( """<style>
@@ -306,6 +332,24 @@ def main():
         guide = WorkoutGuide(is_gym)
         guide.execute_workout()
 
+
+
+def system_autoplay_audio(file_path: str):
+    with open(file_path, "rb") as f:
+        data = f.read()
+        b64 = base64.b64encode(data).decode()
+        md = f"""
+            <audio controls autoplay="true">
+            <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
+            </audio>
+            """
+        st.markdown(
+            md,
+            unsafe_allow_html=True,
+        )
+
+
+
 if __name__ == "__main__":
     
 
@@ -315,19 +359,6 @@ if __name__ == "__main__":
     # import streamlit as st
 
 
-    def autoplay_audio(file_path: str):
-        with open(file_path, "rb") as f:
-            data = f.read()
-            b64 = base64.b64encode(data).decode()
-            md = f"""
-                <audio controls autoplay="true">
-                <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
-                </audio>
-                """
-            st.markdown(
-                md,
-                unsafe_allow_html=True,
-            )
 
 
     # st.write("# Auto-playing Audio!")
