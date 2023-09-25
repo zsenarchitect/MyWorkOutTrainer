@@ -202,6 +202,8 @@ class WorkoutGuide:
                 else:
                     actions_passed_note = ""
                 
+                if actions_to_do[0] == "---":
+                    actions_to_do.pop(0)
                 action_doing = actions_to_do.pop(0)
                 
                 actions_to_do_note = "<br>".join(actions_to_do)
