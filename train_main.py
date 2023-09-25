@@ -47,12 +47,12 @@ class WorkoutGuide:
                        ["宽臂俯卧撑", "俄罗斯转体"]],
             "Tuesday": [["膝盖俯卧撑", "深蹲"], 
                         ["宽臂俯卧撑",  "侧卧弹力带开腿,左", "侧卧弹力带开腿,右"], 
-                        ["平躺蹬自行车", "Leg Raise"], 
+                        ["平躺蹬自行车", "窄臂俯卧撑"], 
                         ["侧身平板支撑,左", "侧身平板支撑,右"]],
             "Wednesday":[["俄罗斯转体", "深蹲"], 
                        ["平躺交叉脚", "宽臂俯卧撑"], 
                        ["单脚站立,右", "单脚站立,左"], 
-                       ["宽臂俯卧撑", "up dog down dog 拉伸"], 
+                       ["窄臂俯卧撑", "up dog down dog 拉伸"], 
                        ["侧身平板支撑,左", "侧身平板支撑,右"], 
                        ["宽臂俯卧撑", "俄罗斯转体"]],
             "Thursday": "Monday",
@@ -166,20 +166,27 @@ class WorkoutGuide:
         if isinstance(self.today_workout, str):
             self.today_workout = workout_data.get(self.today_workout, [[('Missing', 27)]])
         
+        actions_passed = []
+        actions_to_do = []
         st.write("Today's Exercises:")
         for group in self.today_workout:
             print (group)
             st.write(", ".join( group))
+            actions_to_do.extend(group)
         
         # Workout loop
         # self.bt_skip = st.empty()
+        self.display_action_passed = st.empty()
         self.main_placeholder_display = st.empty()
+        self.display_action_to_do = st.empty()
         # Spacer
         st.markdown("<br><br><br><br><br>", unsafe_allow_html=True)
         self.debug_text = st.empty()
         
         self.self_check()
 
+
+        
         for group in self.today_workout:
             for exercise in group:
                 duration  = self.training_set.get(exercise, 29)
@@ -188,7 +195,15 @@ class WorkoutGuide:
                 self.rest_timer(10, extra_text = f"下一个动作:<br>{exercise}")
 
                 self.reader_out(exercise, is_next = False)
+                if len(actions_to_do) != 0:
+                    actions_passed.append(actions_to_do.pop(0))
+                    actions_passed_note = "<br>".join(actions_passed)
+                    actions_to_do_note = "<br>".join(actions_to_do)
+                self.display_action_passed.markdown(f"<body style='text-align:center; font-size:20px; color: grey;font-weight:light;'>{actions_passed_note}</body>", unsafe_allow_html=True)
+                self.display_action_to_do.markdown(f"<body style='text-align:center; font-size:20px; color: white;font-weight:bold;'>{actions_to_do_note}</body>", unsafe_allow_html=True)
                 self.workout_timer(duration, exercise)
+
+
             self.rest_timer(40)
 
         note ="Well done!<br>You've crushed it today!"
