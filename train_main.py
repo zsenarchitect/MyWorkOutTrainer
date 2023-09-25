@@ -168,10 +168,10 @@ class WorkoutGuide:
         
         actions_passed = []
         actions_to_do = []
-        st.write("Today's Exercises:")
+        # st.write("Today's Exercises:")
         for group in self.today_workout:
             print (group)
-            st.write(", ".join( group))
+            # st.write(", ".join( group))
             actions_to_do.extend(group)
         
         # Workout loop
