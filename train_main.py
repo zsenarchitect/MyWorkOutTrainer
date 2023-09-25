@@ -167,6 +167,7 @@ class WorkoutGuide:
             self.today_workout = workout_data.get(self.today_workout, [[('Missing', 27)]])
         
         actions_passed = []
+        action_doing = None
         actions_to_do = []
         # st.write("Today's Exercises:")
         for group in self.today_workout:
@@ -195,10 +196,12 @@ class WorkoutGuide:
                 self.rest_timer(10, extra_text = f"下一个动作:<br>{exercise}")
 
                 self.reader_out(exercise, is_next = False)
-                if len(actions_to_do) != 0:
-                    actions_passed.append(actions_to_do.pop(0))
+                if action_doing != None:
+                    actions_passed.append(action_doing)
                     actions_passed_note = "<br>".join(actions_passed)
                     actions_to_do_note = "<br>".join(actions_to_do)
+                if len(actions_to_do) != 0:
+                    action_doing = actions_to_do.pop(0)
                 self.display_action_passed.markdown(f"<body style='text-align:center; font-size:20px; color: grey;font-weight:light;'>{actions_passed_note}</body>", unsafe_allow_html=True)
                 self.display_action_to_do.markdown(f"<body style='text-align:center; font-size:20px; color: white;font-weight:bold;'>{actions_to_do_note}</body>", unsafe_allow_html=True)
                 self.workout_timer(duration, exercise)
