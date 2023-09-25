@@ -173,8 +173,8 @@ class WorkoutGuide:
         for group in self.today_workout:
             print (group)
             # st.write(", ".join( group))
+            actions_to_do.append("---")       
             actions_to_do.extend(group)
-        
         # Workout loop
         # self.bt_skip = st.empty()
         self.display_action_passed = st.empty()
