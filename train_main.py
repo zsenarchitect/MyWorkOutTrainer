@@ -201,9 +201,10 @@ class WorkoutGuide:
                     actions_passed_note = "<br>".join(actions_passed)
                 else:
                     actions_passed_note = ""
+                
+                action_doing = actions_to_do.pop(0)
+                
                 actions_to_do_note = "<br>".join(actions_to_do)
-                if len(actions_to_do) != 0:
-                    action_doing = actions_to_do.pop(0)
                 
                 if actions_passed_note != "":
                     self.display_action_passed.markdown(f"<body style='text-align:center; font-size:20px; color: grey;font-weight:light;'>{actions_passed_note}</body>", unsafe_allow_html=True)
