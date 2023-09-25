@@ -199,7 +199,9 @@ class WorkoutGuide:
                 if action_doing != None:
                     actions_passed.append(action_doing)
                     actions_passed_note = "<br>".join(actions_passed)
-                    actions_to_do_note = "<br>".join(actions_to_do)
+                else:
+                    actions_passed_note = ""
+                actions_to_do_note = "<br>".join(actions_to_do)
                 if len(actions_to_do) != 0:
                     action_doing = actions_to_do.pop(0)
                 
