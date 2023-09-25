@@ -202,8 +202,11 @@ class WorkoutGuide:
                     actions_to_do_note = "<br>".join(actions_to_do)
                 if len(actions_to_do) != 0:
                     action_doing = actions_to_do.pop(0)
-                self.display_action_passed.markdown(f"<body style='text-align:center; font-size:20px; color: grey;font-weight:light;'>{actions_passed_note}</body>", unsafe_allow_html=True)
-                self.display_action_to_do.markdown(f"<body style='text-align:center; font-size:20px; color: white;font-weight:bold;'>{actions_to_do_note}</body>", unsafe_allow_html=True)
+                
+                if actions_passed_note != "":
+                    self.display_action_passed.markdown(f"<body style='text-align:center; font-size:20px; color: grey;font-weight:light;'>{actions_passed_note}</body>", unsafe_allow_html=True)
+                if actions_to_do_note != "":
+                    self.display_action_to_do.markdown(f"<body style='text-align:center; font-size:20px; color: white;font-weight:bold;'>{actions_to_do_note}</body>", unsafe_allow_html=True)
                 self.workout_timer(duration, exercise)
 
 
