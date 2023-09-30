@@ -230,10 +230,13 @@ class WorkoutGuide:
 
         training_keys = set()
         all_schedules = list(self.home_workout_schedule.values()) + list(self.gym_workout_schedule.values())
-        for group in all_schedules:
-            if isinstance(group, list):
-                for exercise in group:
-                    training_keys.add(exercise)
+        for schedule in all_schedules:
+
+            if isinstance(schedule, list):
+                for group in schedule:
+                    for exercise in group:
+                        training_keys.add(exercise)
+       
     
 
         with open("set_data.json", "r") as f:
