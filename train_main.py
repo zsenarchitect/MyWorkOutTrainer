@@ -229,7 +229,8 @@ class WorkoutGuide:
         self.debug_text.text = "OK"
 
         training_keys = set()
-        for group in self.home_workout_schedule.values() + self.gym_workout_schedule.values():
+        all_schedules = list(self.home_workout_schedule.values()) + list(self.gym_workout_schedule.values())
+        for group in all_schedules:
             if isinstance(group, list):
                 for exercise in group:
                     training_keys.add(exercise)
