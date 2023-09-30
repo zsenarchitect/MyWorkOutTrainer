@@ -40,21 +40,27 @@ class WorkoutGuide:
 
         self.home_workout_schedule = {
             "Monday": [["俄罗斯转体", "深蹲"], 
-                       ["平躺交叉脚", "宽臂俯卧撑"], 
-                       ["单脚站立,右", "单脚站立,左","倒立"], 
-                       ["宽臂俯卧撑", "up dog down dog 拉伸"], 
-                       ["侧身平板支撑,左", "侧身平板支撑,右","腹部着地腰挺"], 
-                       ["宽臂俯卧撑", "俄罗斯转体"]],
+                    ["弹力绳上拉弓，右手","弹力绳上拉弓，左手","弹力绳坐地勾脚肩平拉，右","弹力绳坐地勾脚肩平拉，左","弹力绳手铐外拉","弹力绳横拉弓，右手","弹力绳横拉弓，左手","弹力绳空气引体向上","弹力绳脚踩上提，右","弹力绳脚踩上提，左"],
+                    ["平躺交叉脚", "宽臂俯卧撑"], 
+                    ["单脚站立,右", "单脚站立,左","倒立"], 
+                    ["宽臂俯卧撑", "up dog down dog 拉伸"], 
+                    ["侧身平板支撑,左", "侧身平板支撑,右","腹部着地腰挺"], 
+                    ["宽臂俯卧撑", "俄罗斯转体"],
+                    ["弹力绳上拉弓，右手","弹力绳上拉弓，左手","弹力绳坐地勾脚肩平拉，右","弹力绳坐地勾脚肩平拉，左","弹力绳手铐外拉","弹力绳横拉弓，右手","弹力绳横拉弓，左手","弹力绳空气引体向上","弹力绳脚踩上提，右","弹力绳脚踩上提，左"]],
             "Tuesday": [["膝盖俯卧撑", "深蹲"], 
+                        ["弹力绳上拉弓，右手","弹力绳上拉弓，左手","弹力绳坐地勾脚肩平拉，右","弹力绳坐地勾脚肩平拉，左","弹力绳手铐外拉","弹力绳横拉弓，右手","弹力绳横拉弓，左手","弹力绳空气引体向上","弹力绳脚踩上提，右","弹力绳脚踩上提，左"], 
                         ["宽臂俯卧撑",  "侧卧弹力带开腿,左", "侧卧弹力带开腿,右"], 
                         ["平躺蹬自行车", "窄臂俯卧撑"], 
-                        ["侧身平板支撑,左", "侧身平板支撑,右"]],
+                        ["侧身平板支撑,左", "侧身平板支撑,右"],
+                        ["弹力绳上拉弓，右手","弹力绳上拉弓，左手","弹力绳坐地勾脚肩平拉，右","弹力绳坐地勾脚肩平拉，左","弹力绳手铐外拉","弹力绳横拉弓，右手","弹力绳横拉弓，左手","弹力绳空气引体向上","弹力绳脚踩上提，右","弹力绳脚踩上提，左"]],
             "Wednesday":[["俄罗斯转体", "深蹲"], 
                        ["平躺交叉脚", "宽臂俯卧撑"], 
-                       ["单脚站立,右", "单脚站立,左"], 
+                       ["单脚站立,右", "单脚站立,左"],
+                       ["弹力绳上拉弓，右手","弹力绳上拉弓，左手","弹力绳坐地勾脚肩平拉，右","弹力绳坐地勾脚肩平拉，左","弹力绳手铐外拉","弹力绳横拉弓，右手","弹力绳横拉弓，左手","弹力绳空气引体向上","弹力绳脚踩上提，右","弹力绳脚踩上提，左"], 
                        ["窄臂俯卧撑", "up dog down dog 拉伸"], 
                        ["侧身平板支撑,左", "侧身平板支撑,右"], 
-                       ["宽臂俯卧撑", "俄罗斯转体"]],
+                       ["宽臂俯卧撑", "俄罗斯转体"],
+                       ["弹力绳上拉弓，右手","弹力绳上拉弓，左手","弹力绳坐地勾脚肩平拉，右","弹力绳坐地勾脚肩平拉，左","弹力绳手铐外拉","弹力绳横拉弓，右手","弹力绳横拉弓，左手","弹力绳空气引体向上","弹力绳脚踩上提，右","弹力绳脚踩上提，左"]],
             "Thursday": "Monday",
             "Friday": "Tuesday",
             "Saturday": "Monday",
@@ -226,7 +232,7 @@ class WorkoutGuide:
         pass
         # for all the action from self.setting_map, make sure all of the key there is being used at least once in home schdule and gym scheduele.
         # if not, show them in self.debug_text
-        self.debug_text.text = "OK"
+        # self.debug_text.text = "OK"
 
         training_keys = set()
         all_schedules = list(self.home_workout_schedule.values()) + list(self.gym_workout_schedule.values())
@@ -239,14 +245,21 @@ class WorkoutGuide:
        
     
 
-        with open("set_data.json", "r") as f:
+        with io.open("set_data.json", "r", encoding="UTF-8") as f:
             data = json.load(f)
         unique_keys = sorted(list(set(data.keys()).symmetric_difference(training_keys)))
+        out_A, out_B = [], []   
         for key in unique_keys:
-            if key in training_keys:
-                st.write(f"{key} is not being used in any training shcedule.")
+            if key not in training_keys:
+                st.write(f"A:{key} is not being used in any training shcedule.")
+                print (f"A:{key} is not being used in any training shcedule.")
+                out_A.append(key)
             else:
-                st.write(f"{key} is not prepared in  setting set.")
+                st.write(f"B:{key} is not prepared in  setting set.")
+                print (f"B:{key} is not prepared in  setting set.")
+                out_B.append(key)
+
+        return out_A, out_B
 
 
 
