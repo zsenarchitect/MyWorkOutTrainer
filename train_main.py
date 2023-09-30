@@ -20,11 +20,11 @@ class WorkoutGuide:
     def __init__(self, is_gym):
         data = self.read_log()
         print (data)
-        if data is None:
+        # if data is None:
             
-            st.write("there is no data")
-        else:
-            st.write("showing data:")
+        #     st.write("there is no data")
+        # else:
+        #     st.write("showing data:")
 
 
         for key,value in data.items():
