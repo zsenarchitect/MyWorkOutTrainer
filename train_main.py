@@ -317,9 +317,9 @@ class WorkoutGuide:
         else:
             file_path = f"audios\\start_{exercise}.mp3"
         
-        file_path = "https://github.com/zsenarchitect/MyWorkOutTrainer/blob/main/audios/{}".format(file_path.replace(",","%2C").replace(" ","%20"))
+        # file_path = "https://github.com/zsenarchitect/MyWorkOutTrainer/blob/main/{}".format(file_path.replace(",","%2C").replace(" ","%20"))
         
-        file_path = "C:\Users\sen.zhang\github\MyWorkOutTrainer\audios\{}".format(file_path)
+        file_path = "C:\\Users\\sen.zhang\\github\\MyWorkOutTrainer\\{}".format(file_path)
         # if not os.path.exists(file_path):
         #     return
 
