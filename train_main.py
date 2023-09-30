@@ -57,7 +57,7 @@ class WorkoutGuide:
                        ["宽臂俯卧撑", "俄罗斯转体"]],
             "Thursday": "Monday",
             "Friday": "Tuesday",
-            "Saturday": [["Rest"]],
+            "Saturday": "Monday",
             "Sunday":  "Wednesday"
         }      
 
@@ -79,7 +79,7 @@ class WorkoutGuide:
                         ["平躺蹬自行车", "平躺蹬自行车"]],
             "Thursday": "Monday",
             "Friday": "Tuesday",
-            "Saturday": [["Rest"]],
+            "Saturday":  "Monday",
             'Sunday':  "Wednesday"
             }
         # self.sound_file = BytesIO()
