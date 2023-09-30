@@ -329,7 +329,7 @@ class WorkoutGuide:
             """.format(file_path)
         
 
-        st.markdown("-----<br>", unsafe_allow_html=True)
+        st.markdown("-----<br>--{}".format(file_path), unsafe_allow_html=True)
         attr_name = "sound_{}".format(self.sound_counter)
         setattr(self, attr_name, st.empty())
         getattr(self, attr_name).markdown(html_string, unsafe_allow_html=True)
