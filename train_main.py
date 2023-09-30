@@ -345,6 +345,7 @@ class WorkoutGuide:
 
     
     def reader_out(self, exercise, is_next = False):
+        return
         if is_next:
             file_path = f"audios\\next_{exercise}.mp3"
         else:
