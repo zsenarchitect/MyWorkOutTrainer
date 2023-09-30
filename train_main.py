@@ -317,16 +317,16 @@ class WorkoutGuide:
         else:
             file_path = f"audios\\start_{exercise}.mp3"
         
-        if not os.path.exists(file_path):
-            return
+        # if not os.path.exists(file_path):
+        #     return
 
-        file_raw = file_path.split("\\")[-1]
-        url  = f"https://cp.sync.com/mfs-60:8327c6c348789e2d445a632e7f258132=============================/u/{file_raw}?cachekey=60:8327c6c348789e2d445a632e7f258132=============================&datakey=FDwLrncnj6DOAx6HqaQNQIdfpHICq9vDOpaS/RsdV/npGKahk6SptZmLspfLZUkWlAOqHc5PB0p0PfJj7pii2fdti+vI/rJXzmR2B4oA1KmEibkIdbiEzod5mAOZWlO3CXWZk19+bj+8Qd0hp1jNTaG5CSFvALISfG1spL/QByryAa7kwLpZSdbtKnsAuZlAnvoGnftgJFGSTPbSb9YPsrT2llbPz70KsHi3VpQD/p3OH8USvucdNG3Rd4sqU2G4dZjZyGuWyjfDgAdwhgYn28YXouR9C2tSw3gsyHnyuhrdhI1541/lc0ZNgKXp6rcpaDfsMeg/0UEqvEgT+2ieJA&mode=101&api_version=1&header1=Q29udGVudC1UeXBlOiBhdWRpby9tcGVn&header2=Q29udGVudC1EaXNwb3NpdGlvbjogaW5saW5lOyBmaWxlbmFtZT0ibmV4dF8lRTQlQkYlODQlRTclQkQlOTclRTYlOTYlQUYlRTglQkQlQUMlRTQlQkQlOTMubXAzIjtmaWxlbmFtZSo9VVRGLTgnJ25leHRfJUU0JUJGJTg0JUU3JUJEJTk3JUU2JTk2JUFGJUU4JUJEJUFDJUU0JUJEJTkzLm1wMzs&servtime=1695439602660&engine=cp-3.1.38&userid=2141860011&deviceid=4747950011&devicetypeid=3&access_token=3a608bbd02263318b8b85da9e4a086ddc31484ccb2aed67d9fdb2f22817874dd"
+        #file_raw = file_path.split("\\")[-1]
+        #url  = f"https://cp.sync.com/mfs-60:8327c6c348789e2d445a632e7f258132=============================/u/{file_raw}?cachekey=60:8327c6c348789e2d445a632e7f258132=============================&datakey=FDwLrncnj6DOAx6HqaQNQIdfpHICq9vDOpaS/RsdV/npGKahk6SptZmLspfLZUkWlAOqHc5PB0p0PfJj7pii2fdti+vI/rJXzmR2B4oA1KmEibkIdbiEzod5mAOZWlO3CXWZk19+bj+8Qd0hp1jNTaG5CSFvALISfG1spL/QByryAa7kwLpZSdbtKnsAuZlAnvoGnftgJFGSTPbSb9YPsrT2llbPz70KsHi3VpQD/p3OH8USvucdNG3Rd4sqU2G4dZjZyGuWyjfDgAdwhgYn28YXouR9C2tSw3gsyHnyuhrdhI1541/lc0ZNgKXp6rcpaDfsMeg/0UEqvEgT+2ieJA&mode=101&api_version=1&header1=Q29udGVudC1UeXBlOiBhdWRpby9tcGVn&header2=Q29udGVudC1EaXNwb3NpdGlvbjogaW5saW5lOyBmaWxlbmFtZT0ibmV4dF8lRTQlQkYlODQlRTclQkQlOTclRTYlOTYlQUYlRTglQkQlQUMlRTQlQkQlOTMubXAzIjtmaWxlbmFtZSo9VVRGLTgnJ25leHRfJUU0JUJGJTg0JUU3JUJEJTk3JUU2JTk2JUFGJUU4JUJEJUFDJUU0JUJEJTkzLm1wMzs&servtime=1695439602660&engine=cp-3.1.38&userid=2141860011&deviceid=4747950011&devicetypeid=3&access_token=3a608bbd02263318b8b85da9e4a086ddc31484ccb2aed67d9fdb2f22817874dd"
         html_string = """
             <audio controls autoplay = "true">
                 <source src={} type="audio/mp3">
             </audio>
-            """.format(url)
+            """.format(file_path)
         
 
         st.markdown("-----<br>", unsafe_allow_html=True)
