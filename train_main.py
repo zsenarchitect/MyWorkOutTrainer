@@ -228,6 +228,22 @@ class WorkoutGuide:
         # if not, show them in self.debug_text
         self.debug_text.text = "OK"
 
+        training_keys = set()
+        for group in self.home_workout_schedule.values() + self.gym_workout_schedule.values():
+            if isinstance(group, list):
+                for exercise in group:
+                    training_keys.add(exercise)
+    
+
+        with open("set_data.json", "r") as f:
+            data = json.load(f)
+        unique_keys = sorted(list(set(data.keys()).symmetric_difference(training_keys)))
+        for key in unique_keys:
+            if key in training_keys:
+                st.write(f"{key} is not being used in any training shcedule.")
+            else:
+                st.write(f"{key} is not prepared in  setting set.")
+
 
 
     def read_log(self):
