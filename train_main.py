@@ -421,19 +421,25 @@ def system_autoplay_audio(file_path: str):
 
 class Runner:
     def start_runner_alart(self):
+        log_placeholder_display = st.empty()
         main_placeholder_display = st.empty()
         time_mark = 60
         max = 60
         self.sound_counter = 0
         self.exercises = ["第一跑!!!", "第二跑!!!", "走!!!"]
         self.exercise_index = 0
+        self.log = ""
         while True:
             if time_mark == 0:
                 self.play_sound_indepedent()
                 time_mark = 60
                 self.exercise_index += 1
+                self.exercise_index = self.exercise_index % len(self.exercises)
+                self.log += "\n{}".format(self.exercise)
                 
             self.exercise = self.exercises[self.exercise_index]
+            log_placeholder_display.markdown(f"""<body style="text-align:center; font-size:20px;font-weight:bold;">{self.log}.</body>""", unsafe_allow_html=True)
+
             main_placeholder_display.markdown(f"""<body style="text-align:center; font-size:70px;font-weight:bold;">{self.exercise}<br>{time_mark}/{max}秒.</body>""", unsafe_allow_html=True)
 
             time.sleep(1)
