@@ -425,11 +425,11 @@ class Runner:
         time_mark = 60
         max = 60
         self.sound_counter = 0
-        self.exercises = ["跑!!!", "跑!!!", "走!!!"]
+        self.exercises = ["第一跑!!!", "第二跑!!!", "走!!!"]
         self.exercise_index = 0
         while True:
             if time_mark == 0:
-                self.sound_counter = self.play_sound_indepedent()
+                self.play_sound_indepedent()
                 time_mark = 60
                 self.exercise_index += 1
                 
