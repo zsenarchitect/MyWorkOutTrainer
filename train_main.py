@@ -397,7 +397,7 @@ def main():
     if st.button('开始在家训练'):
         is_gym = False
         is_started = True
-    if st.button('Runner Alarm'):
+    if st.button('晨跑间隔器'):
         Runner().start_runner_alart()
     
     if is_started:
@@ -425,13 +425,16 @@ class Runner:
         time_mark = 60
         max = 60
         self.sound_counter = 0
+        self.exercises = ["跑!!!", "跑!!!", "走!!!"]
+        self.exercise_index = 0
         while True:
             if time_mark == 0:
                 self.sound_counter = self.play_sound_indepedent()
                 time_mark = 60
+                self.exercise_index += 1
                 
-            exercise = "Running!!!"
-            main_placeholder_display.markdown(f"""<body style="text-align:center; font-size:70px;font-weight:bold;">{exercise}<br>{time_mark}/{max}秒.</body>""", unsafe_allow_html=True)
+            self.exercise = self.exercises[self.exercise_index]
+            main_placeholder_display.markdown(f"""<body style="text-align:center; font-size:70px;font-weight:bold;">{self.exercise}<br>{time_mark}/{max}秒.</body>""", unsafe_allow_html=True)
 
             time.sleep(1)
             time_mark -= 1
