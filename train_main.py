@@ -438,7 +438,7 @@ class Runner:
                 self.log += "\n{}".format(self.exercise)
                 
             self.exercise = self.exercises[self.exercise_index]
-            log_placeholder_display.markdown(f"""<body style="text-align:center; font-size:20px;font-weight:bold;">{self.log}.</body>""", unsafe_allow_html=True)
+            log_placeholder_display.markdown(f"""<body style="text-align:center; color: grey; font-size:20px;font-weight:bold;">{self.log}.</body>""", unsafe_allow_html=True)
 
             main_placeholder_display.markdown(f"""<body style="text-align:center; font-size:70px;font-weight:bold;">{self.exercise}<br>{time_mark}/{max}秒.</body>""", unsafe_allow_html=True)
 
