@@ -398,7 +398,7 @@ def main():
         is_gym = False
         is_started = True
     if st.button('Runner Alarm'):
-        start_runner_alart()
+        Runner().start_runner_alart()
     
     if is_started:
         guide = WorkoutGuide(is_gym)
