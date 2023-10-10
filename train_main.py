@@ -404,23 +404,6 @@ def main():
         guide = WorkoutGuide(is_gym)
         guide.execute_workout()
 
-def start_runner_alart():
-    main_placeholder_display = st.empty()
-    time_mark = 60
-    max = 60
-    sound_counter = 0
-    while True:
-        if time_mark == 0:
-            sound_counter = play_sound_indepedent(sound_counter)
-            time_mark = 60
-            
-        exercise = "Running!!!"
-        main_placeholder_display.markdown(f"""<body style="text-align:center; font-size:70px;font-weight:bold;">{exercise}<br>{time_mark}/{max}秒.</body>""", unsafe_allow_html=True)
-
-        time.sleep(1)
-        time_mark -= 1
-
-    
 
 def system_autoplay_audio(file_path: str):
     with open(file_path, "rb") as f:
@@ -436,26 +419,46 @@ def system_autoplay_audio(file_path: str):
             unsafe_allow_html=True,
         )
 
-def  play_sound_indepedent(sound_counter, url = None):
-        if not url:
-            # default ring sounds
-            url = "https://www.orangefreesounds.com/wp-content/uploads/2022/04/Small-bell-ringing-short-sound-effect.mp3"
+class Runner:
+    def start_runner_alart(self):
+        main_placeholder_display = st.empty()
+        time_mark = 60
+        max = 60
+        self.sound_counter = 0
+        while True:
+            if time_mark == 0:
+                self.sound_counter = self.play_sound_indepedent()
+                time_mark = 60
+                
+            exercise = "Running!!!"
+            main_placeholder_display.markdown(f"""<body style="text-align:center; font-size:70px;font-weight:bold;">{exercise}<br>{time_mark}/{max}秒.</body>""", unsafe_allow_html=True)
+
+            time.sleep(1)
+            time_mark -= 1
+
+        
 
 
-        html_string = """
-            <audio controls autoplay = "true">
-                <source src={} type="audio/mp3">
-            </audio>
-            """.format(url)
+    def  play_sound_indepedent(self, url = None):
+            if not url:
+                # default ring sounds
+                url = "https://www.orangefreesounds.com/wp-content/uploads/2022/04/Small-bell-ringing-short-sound-effect.mp3"
 
 
-        st.markdown("-----<br>", unsafe_allow_html=True)
-        attr_name = "sound_{}".format(self.sound_counter)
-        setattr(self, attr_name, st.empty())
-        getattr(self, attr_name).markdown(html_string, unsafe_allow_html=True)
+            html_string = """
+                <audio controls autoplay = "true">
+                    <source src={} type="audio/mp3">
+                </audio>
+                """.format(url)
 
-        sound_counter += 1
-        return sound_counter
+
+            st.markdown("-----<br>", unsafe_allow_html=True)
+            attr_name = "sound_{}".format(self.sound_counter)
+            setattr(self, attr_name, st.empty())
+            getattr(self, attr_name).markdown(html_string, unsafe_allow_html=True)
+
+            self.sound_counter += 1
+            
 
 
 if __name__ == "__main__":
