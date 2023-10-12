@@ -397,7 +397,7 @@ def main():
     if st.button('开始在家训练'):
         is_gym = False
         is_started = True
-    if st.button('晨跑间隔器'):
+    if st.button('晨跑间隔器 or 烤牛排'):
         Runner().start_runner_alart()
     
     if is_started:
